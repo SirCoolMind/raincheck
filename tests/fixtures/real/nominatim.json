@@ -1,0 +1,44 @@
+[
+ {
+  "place_id": 253240935,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "relation",
+  "osm_id": 4443881,
+  "lat": "2.9384381",
+  "lon": "101.6922300",
+  "category": "boundary",
+  "type": "administrative",
+  "place_rank": 8,
+  "importance": 0.5656255296883426,
+  "addresstype": "state",
+  "name": "Putrajaya",
+  "display_name": "Putrajaya, Malaysia",
+  "boundingbox": [
+   "2.8768326",
+   "2.9831441",
+   "101.6598044",
+   "101.7326821"
+  ]
+ },
+ {
+  "place_id": 256609781,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+  "osm_type": "node",
+  "osm_id": 2872238032,
+  "lat": "2.9179726",
+  "lon": "101.6840801",
+  "category": "place",
+  "type": "city",
+  "place_rank": 16,
+  "importance": 0.5656255296883426,
+  "addresstype": "city",
+  "name": "Putrajaya",
+  "display_name": "Putrajaya, 62618, Malaysia",
+  "boundingbox": [
+   "2.7579726",
+   "3.0779726",
+   "101.5240801",
+   "101.8440801"
+  ]
+ }
+]

@@ -1,0 +1,7 @@
+[
+  { "id": "home", "name": "Cyberjaya", "lat": 2.9226, "lon": 101.651, "district": "Sepang" },
+  { "id": "kw", "name": "Putrajaya", "lat": 2.9264, "lon": 101.6964, "district": "Putrajaya" },
+  { "id": "mex-pj", "name": "MEX – Putrajaya", "lat": 2.9969, "lon": 101.6831, "highway": true, "district": "Putrajaya" },
+  { "id": "mex-kl", "name": "MEX – Kuchai Lama", "lat": 3.0968, "lon": 101.6959, "highway": true, "district": "Kuala Lumpur" },
+  { "id": "office", "name": "KLCC", "lat": 3.1579, "lon": 101.7123, "district": "Kuala Lumpur" }
+]

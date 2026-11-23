@@ -1,0 +1,23 @@
+# secrets — never commit
+carto_api_key.txt
+.env
+.env.local
+.env.*.local
+api/config.local.php
+
+# build / deps
+node_modules/
+# dist/ is committed: the server only runs git pull (npm never runs there)
+coverage/
+api/cache/
+playwright-report/
+test-results/
+.lighthouse/
+*.log
+dist-e2e
+*.stackdump
+scripts/.districts-cache.json
+
+# generated screenshots and design reviews (not committed)
+docs/screens/
+.impeccable/review/

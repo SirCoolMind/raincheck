@@ -1,0 +1,1174 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-19T21:16:43.242Z",
+  "title": "Design System: RainCheck",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Cool Paper",
+        "theme": "light",
+        "dark": "{colors.paper-dark}",
+        "canonical": "oklch(95.2% 0.006 128.5)",
+        "tonalRamp": [
+          "#0a0c09",
+          "#232522",
+          "#3f403d",
+          "#5d5e5b",
+          "#7c7e7a",
+          "#9d9f9b",
+          "#c3c5c1",
+          "#edefeb"
+        ]
+      },
+      "sheet": {
+        "role": "neutral",
+        "displayName": "Sheet White",
+        "theme": "light",
+        "dark": "{colors.sheet-dark}",
+        "canonical": "oklch(98.8% 0.003 106.4)",
+        "tonalRamp": [
+          "#0b0b0a",
+          "#242423",
+          "#40403e",
+          "#5e5e5c",
+          "#7d7d7b",
+          "#9e9e9d",
+          "#c4c4c2",
+          "#eeeeec"
+        ]
+      },
+      "sheet-2": {
+        "role": "neutral",
+        "displayName": "Sheet Wash",
+        "theme": "light",
+        "dark": "{colors.sheet-2-dark}",
+        "canonical": "oklch(96.5% 0.006 128.5)",
+        "tonalRamp": [
+          "#0a0c09",
+          "#232522",
+          "#3f403d",
+          "#5d5e5b",
+          "#7c7e7a",
+          "#9d9f9b",
+          "#c3c5c1",
+          "#edefeb"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "theme": "light",
+        "dark": "{colors.ink-dark}",
+        "canonical": "oklch(23.8% 0.027 246.9)",
+        "tonalRamp": [
+          "#030c16",
+          "#192531",
+          "#34414e",
+          "#525f6c",
+          "#717f8d",
+          "#91a0af",
+          "#b7c6d5",
+          "#e1f1ff"
+        ]
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Ink 2",
+        "theme": "light",
+        "dark": "{colors.ink-2-dark}",
+        "canonical": "oklch(43.2% 0.028 246.5)",
+        "tonalRamp": [
+          "#030c16",
+          "#192531",
+          "#34414e",
+          "#515f6d",
+          "#707f8d",
+          "#91a1af",
+          "#b6c6d6",
+          "#e0f1ff"
+        ]
+      },
+      "ink-3": {
+        "role": "neutral",
+        "displayName": "Ink 3",
+        "theme": "light",
+        "dark": "{colors.ink-3-dark}",
+        "canonical": "oklch(52.2% 0.023 245.9)",
+        "tonalRamp": [
+          "#040c14",
+          "#1b252e",
+          "#36414b",
+          "#535f6a",
+          "#737f8a",
+          "#93a0ac",
+          "#b9c6d2",
+          "#e3f0fd"
+        ]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "theme": "light",
+        "dark": "{colors.rule-dark}",
+        "canonical": "oklch(88.6% 0.010 140.5)",
+        "tonalRamp": [
+          "#090c08",
+          "#222521",
+          "#3d413c",
+          "#5b5f5a",
+          "#7a7f79",
+          "#9ba09a",
+          "#c1c6c0",
+          "#ebf0ea"
+        ]
+      },
+      "rule-strong": {
+        "role": "neutral",
+        "displayName": "Strong Hairline",
+        "theme": "light",
+        "dark": "{colors.rule-strong-dark}",
+        "canonical": "oklch(79.4% 0.014 141.8)",
+        "tonalRamp": [
+          "#080d08",
+          "#202620",
+          "#3c423b",
+          "#596059",
+          "#797f78",
+          "#9aa199",
+          "#bfc6be",
+          "#eaf1e9"
+        ]
+      },
+      "band": {
+        "role": "primary",
+        "displayName": "Month-Band Ink Teal",
+        "theme": "light",
+        "dark": "{colors.band-dark}",
+        "canonical": "oklch(33.0% 0.054 224.6)",
+        "tonalRamp": [
+          "#000f1c",
+          "#002937",
+          "#1b4655",
+          "#3a6474",
+          "#598495",
+          "#7aa6b8",
+          "#9fccdf",
+          "#c9f7ff"
+        ]
+      },
+      "band-2": {
+        "role": "primary",
+        "displayName": "Band Teal Lift",
+        "theme": "light",
+        "dark": "{colors.band-2-dark}",
+        "canonical": "oklch(38.3% 0.063 224.3)",
+        "tonalRamp": [
+          "#000f1e",
+          "#002a3a",
+          "#0e4758",
+          "#316578",
+          "#528699",
+          "#73a7bc",
+          "#98cee3",
+          "#c2f8ff"
+        ]
+      },
+      "band-ink": {
+        "role": "primary",
+        "displayName": "Band Paper",
+        "theme": "light",
+        "dark": "{colors.band-ink-dark}",
+        "canonical": "oklch(97.3% 0.004 179.7)",
+        "tonalRamp": [
+          "#090c0b",
+          "#222524",
+          "#3d4040",
+          "#5b5e5e",
+          "#7b7e7d",
+          "#9c9f9e",
+          "#c1c5c4",
+          "#ebefee"
+        ]
+      },
+      "band-ink-2": {
+        "role": "primary",
+        "displayName": "Band Mist",
+        "theme": "light",
+        "dark": "{colors.band-ink-2-dark}",
+        "canonical": "oklch(83.1% 0.028 208.3)",
+        "tonalRamp": [
+          "#000e11",
+          "#13282b",
+          "#2e4447",
+          "#4c6266",
+          "#6b8286",
+          "#8ba4a7",
+          "#b1c9cd",
+          "#daf4f8"
+        ]
+      },
+      "band-rule": {
+        "role": "primary",
+        "displayName": "Band Hairline",
+        "theme": "light"
+      },
+      "now": {
+        "role": "tertiary",
+        "displayName": "Takwim Vermilion",
+        "theme": "light",
+        "dark": "{colors.now-dark}",
+        "canonical": "oklch(54.9% 0.172 32.3)",
+        "tonalRamp": [
+          "#390000",
+          "#5e0000",
+          "#830000",
+          "#a9240b",
+          "#cf4b33",
+          "#f66e55",
+          "#ff957a",
+          "#ffc0a3"
+        ]
+      },
+      "v-dry": {
+        "role": "secondary",
+        "displayName": "Dry Sand",
+        "theme": "light",
+        "dark": "{colors.v-dry-dark}",
+        "canonical": "oklch(90.4% 0.046 92.2)",
+        "tonalRamp": [
+          "#120a00",
+          "#2c2305",
+          "#483f22",
+          "#675d3f",
+          "#877d5e",
+          "#a99e7e",
+          "#cfc4a3",
+          "#f9eecc"
+        ]
+      },
+      "v-dry-ink": {
+        "role": "secondary",
+        "displayName": "Dry Sand Ink",
+        "theme": "light",
+        "dark": "{colors.v-dry-ink-dark}",
+        "canonical": "oklch(32.3% 0.041 92.2)",
+        "tonalRamp": [
+          "#110a00",
+          "#2b230a",
+          "#473f26",
+          "#665d43",
+          "#867d62",
+          "#a79e82",
+          "#cdc4a7",
+          "#f8eed0"
+        ]
+      },
+      "v-possible": {
+        "role": "secondary",
+        "displayName": "Possible Sky",
+        "theme": "light",
+        "dark": "{colors.v-possible-dark}",
+        "canonical": "oklch(88.4% 0.035 244.2)",
+        "tonalRamp": [
+          "#000c19",
+          "#152634",
+          "#304251",
+          "#4d6070",
+          "#6c8091",
+          "#8da1b3",
+          "#b2c7da",
+          "#dbf2ff"
+        ]
+      },
+      "v-possible-ink": {
+        "role": "secondary",
+        "displayName": "Possible Sky Ink",
+        "theme": "light",
+        "dark": "{colors.v-possible-ink-dark}",
+        "canonical": "oklch(30.5% 0.063 248.6)",
+        "tonalRamp": [
+          "#000b24",
+          "#062541",
+          "#23425f",
+          "#416180",
+          "#6081a1",
+          "#80a2c4",
+          "#a5c8ec",
+          "#cff3ff"
+        ]
+      },
+      "v-rain": {
+        "role": "secondary",
+        "displayName": "Rain Blue",
+        "theme": "light",
+        "dark": "{colors.v-rain-dark}",
+        "canonical": "oklch(67.3% 0.108 249.3)",
+        "tonalRamp": [
+          "#000435",
+          "#002355",
+          "#004176",
+          "#246198",
+          "#4681bb",
+          "#67a3df",
+          "#8ccaff",
+          "#b6f5ff"
+        ]
+      },
+      "v-rain-ink": {
+        "role": "secondary",
+        "displayName": "Rain Blue Ink",
+        "theme": "light",
+        "dark": "{colors.v-rain-ink-dark}",
+        "canonical": "oklch(21.4% 0.047 251.6)",
+        "tonalRamp": [
+          "#000b1e",
+          "#12253a",
+          "#2d4158",
+          "#4a6078",
+          "#698099",
+          "#8aa1bb",
+          "#afc7e2",
+          "#d8f1ff"
+        ]
+      },
+      "v-heavy": {
+        "role": "secondary",
+        "displayName": "Heavy Indigo",
+        "theme": "light",
+        "dark": "{colors.v-heavy-dark}",
+        "canonical": "oklch(36.1% 0.126 271.2)",
+        "tonalRamp": [
+          "#06003f",
+          "#12165f",
+          "#293781",
+          "#4456a4",
+          "#6277c8",
+          "#8299ed",
+          "#a6bfff",
+          "#cfeaff"
+        ]
+      },
+      "v-heavy-ink": {
+        "role": "secondary",
+        "displayName": "Heavy Indigo Ink",
+        "theme": "light",
+        "dark": "{colors.v-heavy-ink-dark}",
+        "canonical": "oklch(100.0% 0.000 89.9)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#242424",
+          "#404040",
+          "#5d5d5d",
+          "#7d7d7d",
+          "#9e9e9e",
+          "#c4c4c4",
+          "#eeeeee"
+        ]
+      },
+      "v-nodata": {
+        "role": "secondary",
+        "displayName": "No Data Hatch",
+        "theme": "light",
+        "dark": "{colors.v-nodata-dark}",
+        "canonical": "oklch(92.2% 0.006 137.8)",
+        "tonalRamp": [
+          "#0a0c09",
+          "#232522",
+          "#3e403d",
+          "#5c5e5b",
+          "#7b7e7b",
+          "#9c9f9c",
+          "#c2c5c1",
+          "#ecefeb"
+        ]
+      },
+      "v-nodata-ink": {
+        "role": "secondary",
+        "displayName": "No Data Ink",
+        "theme": "light",
+        "dark": "{colors.v-nodata-ink-dark}",
+        "canonical": "oklch(44.7% 0.022 245.7)",
+        "tonalRamp": [
+          "#040c14",
+          "#1b252e",
+          "#37414b",
+          "#545f69",
+          "#737f8a",
+          "#94a0ab",
+          "#b9c6d2",
+          "#e3f0fc"
+        ]
+      },
+      "ok": {
+        "role": "neutral",
+        "displayName": "Health OK",
+        "theme": "light",
+        "dark": "{colors.ok-dark}",
+        "canonical": "oklch(48.5% 0.090 156.1)",
+        "tonalRamp": [
+          "#001400",
+          "#00300f",
+          "#004d2b",
+          "#2a6d48",
+          "#4c8d66",
+          "#6eaf87",
+          "#93d6ac",
+          "#bdffd5"
+        ]
+      },
+      "warn": {
+        "role": "neutral",
+        "displayName": "Health Warn",
+        "theme": "light",
+        "dark": "{colors.warn-dark}",
+        "canonical": "oklch(50.8% 0.108 73.3)",
+        "tonalRamp": [
+          "#230000",
+          "#411500",
+          "#613300",
+          "#815200",
+          "#a47228",
+          "#c7934c",
+          "#efb972",
+          "#ffe49c"
+        ]
+      },
+      "bad": {
+        "role": "neutral",
+        "displayName": "Health Bad",
+        "theme": "light",
+        "dark": "{colors.bad-dark}",
+        "canonical": "oklch(49.3% 0.157 31.8)",
+        "tonalRamp": [
+          "#360000",
+          "#5a0000",
+          "#7f0000",
+          "#a42e1b",
+          "#c9513d",
+          "#f0745e",
+          "#ff9a82",
+          "#ffc5ab"
+        ]
+      },
+      "route-casing": {
+        "role": "neutral",
+        "displayName": "Route Casing",
+        "theme": "light",
+        "dark": "{colors.route-casing-dark}",
+        "canonical": "oklch(33.0% 0.054 224.6)",
+        "tonalRamp": [
+          "#000f1c",
+          "#002937",
+          "#1b4655",
+          "#3a6474",
+          "#598495",
+          "#7aa6b8",
+          "#9fccdf",
+          "#c9f7ff"
+        ]
+      },
+      "paper-dark": {
+        "role": "neutral",
+        "displayName": "Cool Paper (dark)",
+        "theme": "dark",
+        "canonical": "oklch(17.3% 0.013 237.6)",
+        "tonalRamp": [
+          "#070c10",
+          "#1e2529",
+          "#3a4146",
+          "#575f64",
+          "#777f84",
+          "#98a0a5",
+          "#bdc5cb",
+          "#e7f0f6"
+        ]
+      },
+      "sheet-dark": {
+        "role": "neutral",
+        "displayName": "Sheet White (dark)",
+        "theme": "dark",
+        "canonical": "oklch(21.3% 0.017 241.0)",
+        "tonalRamp": [
+          "#050c12",
+          "#1d252b",
+          "#384148",
+          "#565f66",
+          "#757f87",
+          "#96a0a8",
+          "#bbc6ce",
+          "#e5f0f9"
+        ]
+      },
+      "sheet-2-dark": {
+        "role": "neutral",
+        "displayName": "Sheet Wash (dark)",
+        "theme": "dark",
+        "canonical": "oklch(24.6% 0.021 242.8)",
+        "tonalRamp": [
+          "#040c13",
+          "#1b252d",
+          "#36414a",
+          "#545f69",
+          "#737f89",
+          "#94a0ab",
+          "#b9c6d1",
+          "#e3f1fc"
+        ]
+      },
+      "ink-dark": {
+        "role": "neutral",
+        "displayName": "Ink (dark)",
+        "theme": "dark",
+        "canonical": "oklch(94.2% 0.009 225.1)",
+        "tonalRamp": [
+          "#080c0e",
+          "#202527",
+          "#3b4143",
+          "#595f61",
+          "#787e81",
+          "#99a0a2",
+          "#bfc5c8",
+          "#e9f0f3"
+        ]
+      },
+      "ink-2-dark": {
+        "role": "neutral",
+        "displayName": "Ink 2 (dark)",
+        "theme": "dark",
+        "canonical": "oklch(77.2% 0.018 234.6)",
+        "tonalRamp": [
+          "#040c12",
+          "#1b262c",
+          "#374248",
+          "#546067",
+          "#737f87",
+          "#94a1a8",
+          "#b9c6ce",
+          "#e3f1f9"
+        ]
+      },
+      "ink-3-dark": {
+        "role": "neutral",
+        "displayName": "Ink 3 (dark)",
+        "theme": "dark",
+        "canonical": "oklch(68.8% 0.021 235.9)",
+        "tonalRamp": [
+          "#040c13",
+          "#1a262d",
+          "#354249",
+          "#536068",
+          "#727f88",
+          "#93a1aa",
+          "#b8c7d0",
+          "#e2f1fb"
+        ]
+      },
+      "rule-dark": {
+        "role": "neutral",
+        "displayName": "Hairline (dark)",
+        "theme": "dark",
+        "canonical": "oklch(31.0% 0.022 237.6)",
+        "tonalRamp": [
+          "#030c13",
+          "#1a262d",
+          "#35424a",
+          "#536069",
+          "#727f89",
+          "#92a1ab",
+          "#b8c7d1",
+          "#e2f1fc"
+        ]
+      },
+      "rule-strong-dark": {
+        "role": "neutral",
+        "displayName": "Strong Hairline (dark)",
+        "theme": "dark",
+        "canonical": "oklch(39.3% 0.025 239.3)",
+        "tonalRamp": [
+          "#030c14",
+          "#19262f",
+          "#34424c",
+          "#51606a",
+          "#70808b",
+          "#91a1ac",
+          "#b6c7d3",
+          "#e0f1fe"
+        ]
+      },
+      "band-dark": {
+        "role": "primary",
+        "displayName": "Month-Band Ink Teal (dark)",
+        "theme": "dark",
+        "canonical": "oklch(30.9% 0.048 224.4)",
+        "tonalRamp": [
+          "#000e1a",
+          "#012935",
+          "#204553",
+          "#3f6472",
+          "#5e8493",
+          "#7fa5b5",
+          "#a4cbdc",
+          "#cdf6ff"
+        ]
+      },
+      "band-2-dark": {
+        "role": "primary",
+        "displayName": "Band Teal Lift (dark)",
+        "theme": "dark",
+        "canonical": "oklch(36.6% 0.057 224.3)",
+        "tonalRamp": [
+          "#000f1d",
+          "#002938",
+          "#174656",
+          "#376576",
+          "#578597",
+          "#78a7b9",
+          "#9dcde0",
+          "#c6f8ff"
+        ]
+      },
+      "band-ink-dark": {
+        "role": "primary",
+        "displayName": "Band Paper (dark)",
+        "theme": "dark",
+        "canonical": "oklch(96.5% 0.007 197.0)",
+        "tonalRamp": [
+          "#080c0c",
+          "#202525",
+          "#3b4141",
+          "#595f5f",
+          "#787f7f",
+          "#99a0a0",
+          "#bfc6c6",
+          "#e9f0f0"
+        ]
+      },
+      "band-ink-2-dark": {
+        "role": "primary",
+        "displayName": "Band Mist (dark)",
+        "theme": "dark",
+        "canonical": "oklch(79.3% 0.034 208.4)",
+        "tonalRamp": [
+          "#000f13",
+          "#0d292d",
+          "#294549",
+          "#476368",
+          "#668388",
+          "#87a5aa",
+          "#accbd0",
+          "#d5f5fb"
+        ]
+      },
+      "now-dark": {
+        "role": "tertiary",
+        "displayName": "Takwim Vermilion (dark)",
+        "theme": "dark",
+        "canonical": "oklch(73.1% 0.167 33.8)",
+        "tonalRamp": [
+          "#380000",
+          "#5d0000",
+          "#820000",
+          "#a72809",
+          "#cd4e32",
+          "#f47154",
+          "#ff9879",
+          "#ffc2a3"
+        ]
+      },
+      "v-dry-dark": {
+        "role": "secondary",
+        "displayName": "Dry Sand (dark)",
+        "theme": "dark",
+        "canonical": "oklch(45.0% 0.045 92.9)",
+        "tonalRamp": [
+          "#120a00",
+          "#2c2307",
+          "#483f23",
+          "#665d40",
+          "#867d5f",
+          "#a89e7f",
+          "#cec4a3",
+          "#f9eecd"
+        ]
+      },
+      "v-dry-ink-dark": {
+        "role": "secondary",
+        "displayName": "Dry Sand Ink (dark)",
+        "theme": "dark",
+        "canonical": "oklch(92.4% 0.041 93.2)",
+        "tonalRamp": [
+          "#110a00",
+          "#2b230b",
+          "#473f26",
+          "#655d43",
+          "#857d62",
+          "#a79e82",
+          "#cdc4a7",
+          "#f8efd0"
+        ]
+      },
+      "v-possible-dark": {
+        "role": "secondary",
+        "displayName": "Possible Sky (dark)",
+        "theme": "dark",
+        "canonical": "oklch(36.0% 0.060 246.0)",
+        "tonalRamp": [
+          "#000b22",
+          "#05263f",
+          "#23435e",
+          "#40617e",
+          "#5f819f",
+          "#80a3c2",
+          "#a5c9ea",
+          "#cef3ff"
+        ]
+      },
+      "v-possible-ink-dark": {
+        "role": "secondary",
+        "displayName": "Possible Sky Ink (dark)",
+        "theme": "dark",
+        "canonical": "oklch(92.3% 0.027 244.7)",
+        "tonalRamp": [
+          "#030c16",
+          "#192630",
+          "#34424d",
+          "#51606c",
+          "#707f8d",
+          "#91a1af",
+          "#b6c6d5",
+          "#e0f1ff"
+        ]
+      },
+      "v-rain-dark": {
+        "role": "secondary",
+        "displayName": "Rain Blue (dark)",
+        "theme": "dark",
+        "canonical": "oklch(52.8% 0.123 252.7)",
+        "tonalRamp": [
+          "#00003c",
+          "#00205d",
+          "#003f7e",
+          "#205fa1",
+          "#4280c4",
+          "#63a2e9",
+          "#89c9ff",
+          "#b2f4ff"
+        ]
+      },
+      "v-rain-ink-dark": {
+        "role": "secondary",
+        "displayName": "Rain Blue Ink (dark)",
+        "theme": "dark",
+        "canonical": "oklch(100.0% 0.000 89.9)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#242424",
+          "#404040",
+          "#5d5d5d",
+          "#7d7d7d",
+          "#9e9e9e",
+          "#c4c4c4",
+          "#eeeeee"
+        ]
+      },
+      "v-heavy-dark": {
+        "role": "secondary",
+        "displayName": "Heavy Indigo (dark)",
+        "theme": "dark",
+        "canonical": "oklch(57.4% 0.190 273.4)",
+        "tonalRamp": [
+          "#120057",
+          "#18007d",
+          "#2925a1",
+          "#404ac6",
+          "#5c6dec",
+          "#7b90ff",
+          "#9eb7ff",
+          "#c7e3ff"
+        ]
+      },
+      "v-heavy-ink-dark": {
+        "role": "secondary",
+        "displayName": "Heavy Indigo Ink (dark)",
+        "theme": "dark",
+        "canonical": "oklch(100.0% 0.000 89.9)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#242424",
+          "#404040",
+          "#5d5d5d",
+          "#7d7d7d",
+          "#9e9e9e",
+          "#c4c4c4",
+          "#eeeeee"
+        ]
+      },
+      "v-nodata-dark": {
+        "role": "secondary",
+        "displayName": "No Data Hatch (dark)",
+        "theme": "dark",
+        "canonical": "oklch(28.7% 0.019 238.8)",
+        "tonalRamp": [
+          "#050c12",
+          "#1c252c",
+          "#374149",
+          "#545f67",
+          "#737f87",
+          "#94a0a9",
+          "#b9c6cf",
+          "#e4f1fa"
+        ]
+      },
+      "v-nodata-ink-dark": {
+        "role": "secondary",
+        "displayName": "No Data Ink (dark)",
+        "theme": "dark",
+        "canonical": "oklch(76.6% 0.018 236.8)",
+        "tonalRamp": [
+          "#050c12",
+          "#1c252c",
+          "#374148",
+          "#555f66",
+          "#747f87",
+          "#95a0a8",
+          "#bac6ce",
+          "#e4f1f9"
+        ]
+      },
+      "ok-dark": {
+        "role": "neutral",
+        "displayName": "Health OK (dark)",
+        "theme": "dark",
+        "canonical": "oklch(78.1% 0.123 156.5)",
+        "tonalRamp": [
+          "#001600",
+          "#003305",
+          "#005122",
+          "#00713f",
+          "#2d925e",
+          "#54b57f",
+          "#7cdca3",
+          "#a7ffcd"
+        ]
+      },
+      "warn-dark": {
+        "role": "neutral",
+        "displayName": "Health Warn (dark)",
+        "theme": "dark",
+        "canonical": "oklch(83.4% 0.141 85.4)",
+        "tonalRamp": [
+          "#230000",
+          "#411600",
+          "#603500",
+          "#815400",
+          "#a37500",
+          "#c6960d",
+          "#edbc49",
+          "#ffe777"
+        ]
+      },
+      "bad-dark": {
+        "role": "neutral",
+        "displayName": "Health Bad (dark)",
+        "theme": "dark",
+        "canonical": "oklch(75.7% 0.147 32.3)",
+        "tonalRamp": [
+          "#330000",
+          "#570000",
+          "#7b0900",
+          "#a03421",
+          "#c55641",
+          "#eb7862",
+          "#ff9e86",
+          "#ffc9af"
+        ]
+      },
+      "route-casing-dark": {
+        "role": "neutral",
+        "displayName": "Route Casing (dark)",
+        "theme": "dark",
+        "canonical": "oklch(75.3% 0.024 217.7)",
+        "tonalRamp": [
+          "#010d12",
+          "#16272c",
+          "#324348",
+          "#4f6167",
+          "#6e8187",
+          "#8fa2a8",
+          "#b4c8ce",
+          "#def3f9"
+        ]
+      },
+      "route-dry-dark": {
+        "role": "neutral",
+        "displayName": "Route Sand (dark)",
+        "theme": "dark",
+        "canonical": "oklch(73.1% 0.077 92.3)",
+        "tonalRamp": [
+          "#170700",
+          "#312100",
+          "#4e3e00",
+          "#6d5c25",
+          "#8d7c45",
+          "#af9d66",
+          "#d6c38a",
+          "#ffeeb3"
+        ]
+      }
+    },
+    "verdictRamp": {
+      "light": [
+        "#eadfbd",
+        "#c6dcef",
+        "#5f9bd6",
+        "#27347e"
+      ],
+      "dark": [
+        "#5e5538",
+        "#20405b",
+        "#2f6db0",
+        "#5868e6"
+      ],
+      "nodata": "repeating-linear-gradient(135deg, var(--v-nodata) 0 4px, var(--sheet) 4px 8px)",
+      "note": "Sand → sky → blue → indigo; lightness-stepped single family; always icon + word."
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The departure clock in the month band. One per screen."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "The answer sentence; balanced wrap; 24px in the error state."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Best-time numeral (24px), stretch-detail heading and radar frame time (22px)."
+      },
+      "section": {
+        "displayName": "Section",
+        "purpose": "Uppercase section heads in ink-2. Name a section; never a kicker above a number.",
+        "textTransform": "uppercase"
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Segmented options and band buttons, uppercase.",
+        "textTransform": "uppercase"
+      },
+      "numeral-small": {
+        "displayName": "Numeral small",
+        "purpose": "Ruler, strip ticks, calendar times, wet minutes (13–15px)."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Detail lines and explainer prose (max 68ch)."
+      },
+      "meta": {
+        "displayName": "Meta",
+        "purpose": "Badges, chips, notes, attribution. 12px floor (strip place labels)."
+      }
+    },
+    "shadows": [
+      {
+        "name": "sheet-lift",
+        "value": "0 -6px 24px rgb(14 59 74 / 0.16), 0 -1px 0 rgb(14 59 74 / 0.08)",
+        "dark": "0 -6px 24px rgb(0 0 0 / 0.5), 0 -1px 0 rgb(255 255 255 / 0.04)",
+        "purpose": "Phone bottom sheet only. The single cast shadow in the system."
+      },
+      {
+        "name": "panel-lift",
+        "value": "1px 0 0 var(--rule), 8px 0 28px rgb(14 59 74 / 0.08)",
+        "purpose": "Desktop 400px side panel only (the sheet, docked)."
+      },
+      {
+        "name": "focus-ring",
+        "value": "0 0 0 3px var(--sheet), 0 0 0 5px var(--now)",
+        "purpose": "Solid vermilion focus ring; on the band: 0 0 0 2px var(--band), 0 0 0 4px var(--now)."
+      },
+      {
+        "name": "selected-ring",
+        "value": "0 0 0 2px var(--sheet), 0 0 0 4px var(--now)",
+        "purpose": "Selected stretch cell; current calendar row uses inset 0 0 0 2px var(--now)."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "All transitions."
+      },
+      {
+        "name": "sheet-snap",
+        "value": "transform 0.42s var(--ease-out)",
+        "purpose": "Bottom sheet snap after drag."
+      },
+      {
+        "name": "cell-focus",
+        "value": "opacity 0.2s var(--ease-out), transform 0.2s var(--ease-out)",
+        "purpose": "Strip focus-dims-rest; calendar chevron rotation."
+      },
+      {
+        "name": "skeleton",
+        "value": "shimmer 1.4s linear infinite",
+        "purpose": "Loading only; never in error states."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "0.01ms",
+        "purpose": "prefers-reduced-motion collapses all animation and transition."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "brand",
+        "value": "420px",
+        "purpose": "Wordmark appears in the band."
+      },
+      {
+        "name": "desk",
+        "value": "1024px",
+        "purpose": "Sheet becomes fixed 400px left panel; zoom control, strip legend and 5-label ruler appear."
+      }
+    ],
+    "tap": "44px"
+  },
+  "components": [
+    {
+      "name": "Month Band",
+      "kind": "custom",
+      "refersTo": "month-band",
+      "description": "Solid ink-teal band holding preset, clock and scrubber.",
+      "html": "<div class=\"ds-band\"><div class=\"ds-seg\"><button aria-pressed=\"true\">Morning</button><button>Evening</button><button>Custom</button></div><div class=\"ds-depart\"><span class=\"ds-verb\">Leave</span><span class=\"ds-clock\">07:30</span><span class=\"ds-arrive\">→ 08:30</span></div></div>",
+      "css": ".ds-band{background:var(--band,#0e3b4a);color:var(--band-ink,#f3f7f6);padding:16px 16px 12px}.ds-seg{display:inline-flex;background:rgb(0 0 0/.22);border-radius:999px;padding:3px;gap:2px}.ds-seg button{min-height:44px;padding:0 14px;border:0;border-radius:999px;background:transparent;color:var(--band-ink-2,#b4cdd1);font:600 15px/1 'Barlow Condensed','Arial Narrow',sans-serif;letter-spacing:.04em;text-transform:uppercase;cursor:pointer}.ds-seg button[aria-pressed='true']{background:var(--band-ink,#f3f7f6);color:var(--band,#0e3b4a)}.ds-seg button:focus-visible{outline:none;box-shadow:0 0 0 2px var(--band,#0e3b4a),0 0 0 4px var(--now,#c13d26)}.ds-depart{display:flex;align-items:baseline;gap:10px;margin-top:12px;font-family:'Barlow Condensed','Arial Narrow',sans-serif;font-variant-numeric:tabular-nums}.ds-verb{font:600 18px/1 'Barlow Condensed',sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--band-ink-2,#b4cdd1)}.ds-clock{font-size:42px;font-weight:600;line-height:.9}.ds-arrive{font-size:16px;font-weight:500;color:var(--band-ink-2,#b4cdd1)}"
+    },
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Band-teal action on the sheet.",
+      "html": "<button class=\"ds-btn-primary\">Done</button>",
+      "css": ".ds-btn-primary{min-height:44px;padding:0 16px;border-radius:6px;border:1px solid var(--band,#0e3b4a);background:var(--band,#0e3b4a);color:var(--band-ink,#f3f7f6);font:600 15px/1 system-ui,sans-serif;cursor:pointer}.ds-btn-primary:hover{background:var(--band-2,#134a5c)}.ds-btn-primary:focus-visible{outline:none;box-shadow:0 0 0 3px var(--sheet,#fbfbf9),0 0 0 5px var(--now,#c13d26)}"
+    },
+    {
+      "name": "Default Button",
+      "kind": "button",
+      "refersTo": "button",
+      "description": "Hairline-bordered sheet button.",
+      "html": "<button class=\"ds-btn\">Edit route</button>",
+      "css": ".ds-btn{min-height:44px;padding:0 16px;border-radius:6px;border:1px solid var(--rule-strong,#b7beb6);background:var(--sheet,#fbfbf9);color:var(--ink,#14202b);font:600 15px/1 system-ui,sans-serif;cursor:pointer}.ds-btn:hover{background:var(--sheet-2,#f2f4f0)}.ds-btn:focus-visible{outline:none;box-shadow:0 0 0 3px var(--sheet,#fbfbf9),0 0 0 5px var(--now,#c13d26)}"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "44px hairline field; vermilion border on focus.",
+      "html": "<input class=\"ds-input\" type=\"text\" placeholder=\"Search a place\">",
+      "css": ".ds-input{min-height:44px;padding:0 12px;border-radius:6px;border:1px solid var(--rule-strong,#b7beb6);background:var(--sheet,#fbfbf9);color:var(--ink,#14202b);font:400 16px/1 system-ui,sans-serif;width:100%}.ds-input:focus-visible{outline:none;border-color:var(--now,#c13d26);box-shadow:0 0 0 3px var(--sheet,#fbfbf9),0 0 0 5px var(--now,#c13d26)}"
+    },
+    {
+      "name": "Journey Strip",
+      "kind": "custom",
+      "refersTo": "stretch-cell-rain",
+      "description": "A takwim row: equal flat verdict cells with drawn icons; selected ringed in vermilion.",
+      "html": "<div class=\"ds-strip\"><button class=\"ds-cell ds-dry\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\"><circle cx=\"12\" cy=\"12\" r=\"4.2\"/><path d=\"M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2\"/></svg></button><button class=\"ds-cell ds-possible\"></button><button class=\"ds-cell ds-rain ds-on\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 12a9 9 0 0 1 18 0Z\"/><path d=\"M12 12v6.6a2.2 2.2 0 0 1-4.4 0\"/></svg></button><button class=\"ds-cell ds-heavy\"></button><button class=\"ds-cell ds-nodata\"></button></div>",
+      "css": ".ds-strip{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:2px;max-width:320px}.ds-cell{height:48px;border:0;border-radius:3px;display:grid;place-items:center;cursor:pointer;transition:opacity .2s cubic-bezier(.16,1,.3,1)}.ds-cell:focus-visible,.ds-on{outline:none;box-shadow:0 0 0 2px var(--sheet,#fbfbf9),0 0 0 4px var(--now,#c13d26)}.ds-dry{background:var(--v-dry,#eadfbd);color:var(--v-dry-ink,#3b331a)}.ds-possible{background:var(--v-possible,#c6dcef);color:var(--v-possible-ink,#12314d)}.ds-rain{background:var(--v-rain,#5f9bd6);color:var(--v-rain-ink,#071a2e)}.ds-heavy{background:var(--v-heavy,#27347e);color:var(--v-heavy-ink,#fff)}.ds-nodata{background:repeating-linear-gradient(135deg,var(--v-nodata,#e3e6e2) 0 4px,var(--sheet,#fbfbf9) 4px 8px);color:var(--v-nodata-ink,#4b5660)}"
+    },
+    {
+      "name": "Departure Calendar",
+      "kind": "custom",
+      "refersTo": "calendar-row",
+      "description": "Signature takwim grid: departures as hairline-ruled rows; current ringed vermilion, best ringed ink.",
+      "html": "<div class=\"ds-cal\"><button class=\"ds-row\"><span class=\"ds-t\">07:20</span><span class=\"ds-days\"><i class=\"d\"></i><i class=\"r\"></i><i class=\"r\"></i><i class=\"d\"></i></span><span class=\"ds-w\">10</span></button><button class=\"ds-row ds-cur\"><span class=\"ds-t\">07:30</span><span class=\"ds-days\"><i class=\"d\"></i><i class=\"r\"></i><i class=\"h\"></i><i class=\"d\"></i></span><span class=\"ds-w\">15</span></button><button class=\"ds-row ds-best\"><span class=\"ds-t\">08:30</span><span class=\"ds-days\"><i class=\"d\"></i><i class=\"d\"></i><i class=\"d\"></i><i class=\"d\"></i></span><span class=\"ds-w\">0</span></button></div>",
+      "css": ".ds-cal{display:grid;max-width:360px}.ds-row{display:grid;grid-template-columns:56px 1fr 52px;align-items:center;gap:8px;min-height:44px;padding:0 4px;border:0;border-top:1px solid var(--rule,#d6dbd5);background:transparent;color:var(--ink,#14202b);border-radius:4px;cursor:pointer;width:100%}.ds-row:hover{background:var(--sheet-2,#f2f4f0)}.ds-row:focus-visible{outline:none;box-shadow:0 0 0 3px var(--sheet,#fbfbf9),0 0 0 5px var(--now,#c13d26)}.ds-t{font:500 15px/1 'Barlow Condensed',sans-serif;font-variant-numeric:tabular-nums;justify-self:start}.ds-w{font:500 14px/1 'Barlow Condensed',sans-serif;font-variant-numeric:tabular-nums;text-align:right;color:var(--ink-2,#44525f)}.ds-days{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;height:28px}.ds-days i{border-radius:2px}.ds-days .d{background:var(--v-dry,#eadfbd)}.ds-days .r{background:var(--v-rain,#5f9bd6)}.ds-days .h{background:var(--v-heavy,#27347e)}.ds-cur{box-shadow:inset 0 0 0 2px var(--now,#c13d26)}.ds-cur .ds-t{font-weight:700}.ds-best .ds-t{padding:3px 5px;margin-left:-5px;border:1.5px solid var(--ink,#14202b);border-radius:999px}"
+    },
+    {
+      "name": "Best-time Chip",
+      "kind": "card",
+      "refersTo": "best-chip",
+      "description": "Tabular time, arrival sentence, sparkline (current vermilion, best ink).",
+      "html": "<button class=\"ds-best\"><span class=\"ds-bt\">08:30</span><span class=\"ds-bs\">Arrive ~09:30 dry instead of ~15 min in rain.</span><svg width=\"92\" height=\"30\"><rect x=\"1\" y=\"14\" width=\"8\" height=\"16\" fill=\"#5f9bd6\"/><rect x=\"11\" y=\"6\" width=\"8\" height=\"24\" fill=\"#c13d26\"/><rect x=\"21\" y=\"21\" width=\"8\" height=\"9\" fill=\"#14202b\"/><rect x=\"31\" y=\"28\" width=\"8\" height=\"2\" fill=\"#b7beb6\"/></svg></button>",
+      "css": ".ds-best{width:100%;max-width:380px;min-height:56px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;padding:8px 14px;border-radius:6px;border:1px solid var(--rule-strong,#b7beb6);background:var(--sheet,#fbfbf9);color:var(--ink,#14202b);text-align:left;cursor:pointer}.ds-best:hover{background:var(--sheet-2,#f2f4f0)}.ds-best:focus-visible{outline:none;box-shadow:0 0 0 3px var(--sheet,#fbfbf9),0 0 0 5px var(--now,#c13d26)}.ds-bt{font:600 24px/1 'Barlow Condensed',sans-serif;font-variant-numeric:tabular-nums}.ds-bs{font:400 13px/1.3 system-ui,sans-serif;color:var(--ink-2,#44525f)}"
+    },
+    {
+      "name": "Caveat Badge",
+      "kind": "chip",
+      "refersTo": "badge-caveat",
+      "description": "Hairline warn badge; never a tinted fill.",
+      "html": "<span class=\"ds-caveat\"><svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3.5 21.5 20h-19ZM12 10v4.5M12 17.2v.3\"/></svg>1 source down</span>",
+      "css": ".ds-caveat{display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:999px;border:1px solid color-mix(in srgb,var(--warn,#8a5a00) 55%,transparent);background:transparent;color:var(--ink,#14202b);font:600 13px/1.3 system-ui,sans-serif}.ds-caveat svg{color:var(--warn,#8a5a00)}"
+    },
+    {
+      "name": "Source Chip",
+      "kind": "chip",
+      "refersTo": "source-chip",
+      "description": "Hairline pill with a shape-coded status mark.",
+      "html": "<span class=\"ds-chip\"><i class=\"ds-st ok\"></i>Open-Meteo <small>2 min</small></span> <span class=\"ds-chip failed\"><i class=\"ds-st\"></i>MET Norway <small>failed</small></span>",
+      "css": ".ds-chip{display:inline-flex;align-items:center;gap:7px;padding:6px 10px;border-radius:999px;border:1px solid var(--rule,#d6dbd5);background:var(--sheet,#fbfbf9);font:400 13px/1.3 system-ui,sans-serif;color:var(--ink,#14202b)}.ds-chip small{color:var(--ink-3,#5f6b76);font-size:13px}.ds-st{width:8px;height:8px;border-radius:50%}.ds-st.ok{background:var(--ok,#2c6e49)}.ds-chip.failed{border-color:color-mix(in srgb,var(--bad,#a8321f) 45%,var(--rule,#d6dbd5))}.ds-chip.failed .ds-st{border-radius:1px;box-shadow:inset 0 0 0 2px var(--bad,#a8321f)}.ds-chip.failed small{color:var(--bad,#a8321f)}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Takwim",
+    "overview": "RainCheck is set like the printed wall calendar that hangs in every Malaysian kitchen and office: a solid ink-teal month band at the top, big condensed numerals in a strict grid, flat process-colour fills for the days that matter, and small annotations in the corners. The drive is a takwim row. Each five-minute stretch is a cell with a tabular time, a place note and a flat verdict fill. The departure scan is a full calendar page, with departures as rows and stretches as columns.\n\nThe system is calm and printed, not alarming and glowing. Rain is normal here, so the verdict ramp stays in one sand-to-indigo family, and no red alert or weather-app chrome appears. Paper and ink carry the page. Hairlines carry the structure. Colour is spent on the verdict ramp and on one reserved vermilion that marks \"now\" and \"selected\". The phone is sparse and puts the answer first. The 400 px desktop panel is denser but keeps the same order.\n\nThe world rejects the generic weather app: a big temperature, hourly cards, red alert banners, a dashboard of cards, and false precision.",
+    "keyCharacteristics": [
+      "A solid ink-teal month band holds the departure controls (direction preset, clock, scrubber).",
+      "Barlow Condensed tabular numerals for every time, count and label. system-ui for reading text.",
+      "A flat sand → sky → blue → indigo verdict ramp. Every verdict is paired with a drawn icon and a word.",
+      "Vermilion is reserved for now/selected.",
+      "The departure calendar grid is the signature component.",
+      "1 px hairline rules. No cast shadows, except the sheet's lift off the map."
+    ],
+    "rules": [
+      {
+        "name": "The Reserved Vermilion Rule",
+        "body": "Vermilion means \"now\" or \"selected\". It never marks \"best\", never marks weather, and never marks an error. The best departure is ringed in ink, like a holiday circled on a calendar.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Family Rule",
+        "body": "Verdicts are encoded by lightness inside one sand-to-indigo family, and each one is always paired with its drawn icon and its word. A verdict is never shown by colour alone.",
+        "section": "colors"
+      },
+      {
+        "name": "The No False Dry Rule",
+        "body": "Health hues never fill a surface. A warn-amber tint reads as Dry Sand, so caveats use a hairline border and an icon.",
+        "section": "colors"
+      },
+      {
+        "name": "The Tabular Rule",
+        "body": "Every number uses `tabular-nums` in the condensed face, so times never shift while scrubbing.",
+        "section": "typography"
+      },
+      {
+        "name": "The Type-Is-Interface Rule",
+        "body": "The answer sentence is set large and stands on the sheet with no card around it.",
+        "section": "typography"
+      },
+      {
+        "name": "The Only Lift Rule",
+        "body": "Only the sheet casts a shadow. Pins, chips, cards and map controls are flat, and MapLibre's control shadow is removed.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** pair every verdict fill with its drawn icon and its word (Dry, Possible, Rain, Heavy, No data).",
+      "**Do** set every time, count and duration in Barlow Condensed with `tabular-nums`.",
+      "**Do** ring the best departure in ink (1.5px pill) and keep vermilion for the current departure and the selected stretch.",
+      "**Do** separate sections and calendar rows with 1px hairlines instead of boxes.",
+      "**Do** draw caveats as hairline badges (warn at 55% border, ink text, warn icon).",
+      "**Do** keep every target at 44px or more and every readable text at 12px or more.",
+      "**Do** hedge thin-data verdicts in words (\"Likely rain…\", \"1 of 6 sources answered\") instead of dimming the colour.",
+      "**Do** draw missing data as the hatch, never as a flat fill."
+    ],
+    "donts": [
+      "**Don't** use vermilion for \"best\", for weather, or for errors.",
+      "**Don't** fill a caveat or warning badge with a tint of warn. Amber at low alpha reads as Dry Sand.",
+      "**Don't** put a small uppercase kicker or eyebrow label above a number. The number and its sentence carry the meaning, and section headings name sections.",
+      "**Don't** use red/green or any second hue family for verdict levels.",
+      "**Don't** add drop shadows to pins, chips, cards or map controls. Only the sheet lifts.",
+      "**Don't** nest cards, or put the answer sentence in a card.",
+      "**Don't** use emoji or Unicode glyphs (☀ ⛅ ☂ ⛈ ★) as icons.",
+      "**Don't** show false precision (\"37% at 08:23\") or leave a shimmer running in an error state."
+    ]
+  }
+}

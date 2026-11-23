@@ -1,0 +1,138 @@
+/* RainCheck design tokens: "takwim" world.
+   Paper ground, a solid ink-teal month band, condensed tabular numerals,
+   flat verdict fills on a sand → sky → blue → indigo ramp, vermilion reserved for now/selected. */
+
+:root {
+  color-scheme: light;
+  --font-num: 'Barlow Condensed', 'Arial Narrow', system-ui, sans-serif;
+  --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  /* Paper + ink */
+  --paper: #eef0ec;
+  --sheet: #fbfbf9;
+  --sheet-2: #f2f4f0;
+  --ink: #14202b;
+  --ink-2: #44525f;
+  --ink-3: #5f6b76;
+  --rule: #d6dbd5;
+  --rule-strong: #b7beb6;
+
+  /* Month band */
+  --band: #0e3b4a;
+  --band-2: #134a5c;
+  --band-ink: #f3f7f6;
+  --band-ink-2: #b4cdd1;
+  --band-rule: rgb(255 255 255 / 0.16);
+
+  /* Reserved: now / selected (never used for weather) */
+  --now: #c13d26;
+  --now-soft: rgb(193 61 38 / 0.12);
+
+  /* Verdict ramp (CVD-safe: one blue family, lightness steps, never red/green) */
+  --v-dry: #eadfbd;
+  --v-dry-ink: #3b331a;
+  --v-possible: #c6dcef;
+  --v-possible-ink: #12314d;
+  --v-rain: #5f9bd6;
+  --v-rain-ink: #071a2e;
+  --v-heavy: #27347e;
+  --v-heavy-ink: #ffffff;
+  --v-nodata: #e3e6e2;
+  --v-nodata-ink: #4b5660;
+
+  /* Health */
+  --ok: #2c6e49;
+  --warn: #8a5a00;
+  --bad: #a8321f;
+
+  /* Map */
+  --route-casing: #0e3b4a;
+
+  /* Space (4 px base) */
+  --s1: 4px;
+  --s2: 8px;
+  --s3: 12px;
+  --s4: 16px;
+  --s5: 20px;
+  --s6: 24px;
+  --s8: 32px;
+  --s10: 40px;
+
+  --radius: 6px;
+  --radius-lg: 14px;
+  --tap: 44px;
+  --sheet-shadow: 0 -6px 24px rgb(14 59 74 / 0.16), 0 -1px 0 rgb(14 59 74 / 0.08);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --focus: 0 0 0 3px var(--sheet), 0 0 0 5px var(--now);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --paper: #0b1115;
+    --sheet: #121a20;
+    --sheet-2: #18222a;
+    --ink: #e6edf0;
+    --ink-2: #aab7bf;
+    --ink-3: #8f9da6;
+    --rule: #26323a;
+    --rule-strong: #3a4852;
+    --band: #0f3542;
+    --band-2: #164555;
+    --band-ink: #eef5f5;
+    --band-ink-2: #a3c2c7;
+    --now: #ff7b5e;
+    --now-soft: rgb(255 123 94 / 0.16);
+    --v-dry: #5e5538;
+    --v-dry-ink: #efe6c8;
+    --v-possible: #20405b;
+    --v-possible-ink: #d7e8f7;
+    --v-rain: #2f6db0;
+    --v-rain-ink: #ffffff;
+    --v-heavy: #5868e6;
+    --v-heavy-ink: #ffffff;
+    --v-nodata: #222c33;
+    --v-nodata-ink: #a9b5bd;
+    --ok: #6fcf97;
+    --warn: #f2c14e;
+    --bad: #ff8a73;
+    --route-casing: #9fb3b9;
+    --ctrl-icon-filter: invert(1);
+    --route-dry: #b9a76f;
+    --sheet-shadow: 0 -6px 24px rgb(0 0 0 / 0.5), 0 -1px 0 rgb(255 255 255 / 0.04);
+  }
+}
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --paper: #0b1115;
+  --sheet: #121a20;
+  --sheet-2: #18222a;
+  --ink: #e6edf0;
+  --ink-2: #aab7bf;
+  --ink-3: #8f9da6;
+  --rule: #26323a;
+  --rule-strong: #3a4852;
+  --band: #0f3542;
+  --band-2: #164555;
+  --band-ink: #eef5f5;
+  --band-ink-2: #a3c2c7;
+  --now: #ff7b5e;
+  --now-soft: rgb(255 123 94 / 0.16);
+  --v-dry: #5e5538;
+  --v-dry-ink: #efe6c8;
+  --v-possible: #20405b;
+  --v-possible-ink: #d7e8f7;
+  --v-rain: #2f6db0;
+  --v-rain-ink: #ffffff;
+  --v-heavy: #5868e6;
+  --v-heavy-ink: #ffffff;
+  --v-nodata: #222c33;
+  --v-nodata-ink: #a9b5bd;
+  --ok: #6fcf97;
+  --warn: #f2c14e;
+  --bad: #ff8a73;
+  --route-casing: #9fb3b9;
+  --ctrl-icon-filter: invert(1);
+  --route-dry: #b9a76f;
+  --sheet-shadow: 0 -6px 24px rgb(0 0 0 / 0.5), 0 -1px 0 rgb(255 255 255 / 0.04);
+}
