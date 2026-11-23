@@ -296,7 +296,7 @@ Even though the proxy keeps the key server-side, restrict it:
 
 1. In the CARTO dashboard go to **Developers → API keys**.
 2. Open the key and set the allowed referrers / domains to `https://<domain>`.
-3. Re-run the CARTO smoke test in step 8. If it returns 403 from the server, CARTO's referrer check is rejecting proxy requests that carry no `Referer`. In that case loosen the referrer restriction. Browsers never see the key in proxy mode, so the restriction is a secondary safeguard only.
+3. Re-run the CARTO smoke test in step 8. The proxy sends `SITE_URL` as `Referer` and `Origin`, so a domain restriction works as long as `SITE_URL` is set in `config.local.php`. If it still returns 403, loosen the restriction: browsers never see the key in proxy mode, so it is a secondary safeguard only.
 
 ## 8. Smoke tests
 

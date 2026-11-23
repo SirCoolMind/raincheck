@@ -46,7 +46,12 @@ $isJson = (bool) preg_match('#\.json$#i', $p);
 $cacheKey = 'carto:' . $h . '/' . $p . '?' . $qs; // never contains the API key
 
 send_cached_or_fetch($cacheKey, $isJson ? 3600 : 86400, function () use ($url, $isJson, $apiKey) {
-    $r = upstream_get($url, ['Accept: */*'], 10, false); // never follow a redirect with the key attached
+    // Send the public site address as Referer/Origin, so a CARTO key restricted to this domain still works
+    // when the server fetches on the browser's behalf.
+    $hdr = ['Accept: */*'];
+    $site = rtrim((string) cfg('SITE_URL', ''), '/');
+    if (preg_match('#^https?://[A-Za-z0-9.-]+(:\d+)?$#', $site)) { $hdr[] = 'Referer: ' . $site . '/'; $hdr[] = 'Origin: ' . $site; }
+    $r = upstream_get($url, $hdr, 10, false); // never follow a redirect with the key attached
     $ct = $r['headers']['content-type'] ?? 'application/octet-stream';
     if ($r['status'] >= 200 && $r['status'] < 300) {
         if ($isJson || preg_match('#json|text|xml|javascript#i', $ct)) {

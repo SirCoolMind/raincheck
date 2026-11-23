@@ -21,3 +21,6 @@ scripts/.districts-cache.json
 # generated screenshots and design reviews (not committed)
 docs/screens/
 .impeccable/review/
+
+# private deploy notes (server address, commands)
+*.local.md
