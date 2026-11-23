@@ -15,10 +15,10 @@ Placeholders used below:
 Server layout (one folder, a normal git clone):
 
 ```
-/var/www/raincheck/               git clone of this repo, owned by root
+/var/www/raincheck/               git clone of this repo, owned deploy:www-data (a normal deploy user)
   dist/                           built site, committed; this is the Nginx web root
   api/*.php                       PHP endpoints, served as /api/*.php
-  api/config.local.php            server-only secrets, gitignored (git pull never touches it), root:raincheck 640
+  api/config.local.php            server-only secrets, gitignored (git pull never touches it), deploy:raincheck 640
 /var/cache/raincheck/             PHP file cache (CACHE_DIR), owned by raincheck
 ```
 
@@ -44,7 +44,7 @@ npm run check:key
 Every deploy after the first:
 
 ```bash
-ssh root@<server> "cd /var/www/raincheck && git pull --ff-only"
+ssh root@<server> "sudo -u deploy git -C /var/www/raincheck pull --ff-only"
 ```
 
 No reload is needed: Nginx serves the new `dist/` at once, and PHP reads the new `api/` files on the next request. Re-run a smoke test from step 8.
@@ -52,7 +52,8 @@ No reload is needed: Nginx serves the new `dist/` at once, and PHP reads the new
 First time only:
 
 ```bash
-git clone <repo-url> /var/www/raincheck     # as root
+sudo git clone <repo-url> /var/www/raincheck
+sudo chown -R deploy:www-data /var/www/raincheck
 ```
 
 Then do steps 3 to 6.
@@ -263,7 +264,7 @@ sudo systemctl reload php<PHP>-fpm
 sudo install -d -o raincheck -g raincheck -m 750 /var/cache/raincheck
 ```
 
-The cache is outside the web root, so Nginx never serves it. The code stays owned by root, so PHP cannot change it.
+The cache is outside the web root, so Nginx never serves it. The code is owned by `deploy`, not by the PHP user, so PHP cannot change it.
 
 ## 6. Server-only config
 
@@ -272,9 +273,9 @@ Create it once from the example and fill it in by hand. It is gitignored, so `gi
 ```bash
 cd /var/www/raincheck/api
 sudo cp config.example.php config.local.php
-sudo chown root:raincheck config.local.php
+sudo chown deploy:raincheck config.local.php
 sudo chmod 640 config.local.php
-sudo nano config.local.php
+sudo -u deploy nano config.local.php
 ```
 
 In the editor, set:
