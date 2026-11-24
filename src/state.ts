@@ -6,7 +6,7 @@ import type {
   MetMyForecast,
   MetMyWarning,
   RadarIndex,
-  RadarSample,
+  RadarDetail, RadarSample,
   RouteData,
   SourceHealth,
   SourceResult,
@@ -46,6 +46,8 @@ export interface AppState {
   sources: SourceResult[];
   radar: RadarIndex | null;
   radarSamples: RadarSample[] | null;
+  /** Clear-now / rained-recently per stretch, from the same frames (same 30-min freshness rule). */
+  radarDetail: RadarDetail[] | null;
   /** Time of the radar frame the samples came from (samples older than 30 min are ignored). */
   radarSampleMs: number | null;
   metmy: { forecasts: MetMyForecast[]; warnings: MetMyWarning[] } | null;

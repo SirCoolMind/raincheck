@@ -95,6 +95,12 @@ export interface RadarIndex {
 /** Per stretch: was rain detected at the stretch midpoint in the latest radar frame? null = unknown. */
 export type RadarSample = boolean | null;
 
+/** Per stretch: no echo within ~4 km in the latest frame, and any echo there in the hour before it. */
+export interface RadarDetail {
+  clear: boolean | null;
+  recentWet: boolean | null;
+}
+
 // ───────────── MET Malaysia ─────────────
 export interface MetMyForecast {
   district: District;
@@ -128,6 +134,10 @@ export interface Verdict {
   /** Level before any radar bump. */
   baseLevel: Level;
   radarBumped: boolean;
+  /** Lowered one level because the radar is clear there now (ETA within RADAR_CLEAR_WINDOW_MIN). */
+  radarLowered?: boolean;
+  /** Radar is clear now but showed rain there in the last hour: roads may still be wet. */
+  justEnded?: boolean;
   /** Sources supporting the verdict's claim (dry→dry count; possible/rain→wet count; heavy→heavy count). */
   agree: number;
   /** Sources that returned a value. */
@@ -157,6 +167,8 @@ export interface Summary {
   sentence: string;
   /** Secondary line, e.g. "Also possible 08:50 near Kuchai Lama" or ''. */
   detail: string;
+  /** Radar note, e.g. "Rain just ended near Putrajaya – roads may be wet" or ''. */
+  note?: string;
   windows: Window[];
   /** Agreement for the headline window (or whole trip when dry). */
   agree: number;

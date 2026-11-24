@@ -42,11 +42,12 @@ import { evaluateTrip } from './core/evaluate';
 import { summarize } from './core/summary';
 import { pickBest, scanDepartures } from './core/bestTime';
 import { nearestVertex } from './core/geo';
-import type { MetMyForecast, MetMyWarning, RadarIndex, RadarSample, RouteData, SourceHealth, SourceResult } from './core/types';
+import type { MetMyForecast, MetMyWarning, RadarDetail, RadarIndex, RadarSample, RouteData, SourceHealth, SourceResult } from './core/types';
 import { fetchRoute } from './sources/osrm';
 import { fetchOpenMeteo } from './sources/openmeteo';
 import { fetchMetNo } from './sources/metno';
-import { fetchRadarIndex, sampleRadar, browserImageLoader } from './sources/rainviewer';
+import { APP_VERSION, versionLabel } from './version';
+import { fetchRadarIndex, sampleRadar, sampleRadarDetail, browserImageLoader } from './sources/rainviewer';
 import { fetchMetMy } from './sources/metmy';
 import { idbGet, idbSet } from './sources/http';
 import { el } from './ui/dom';
@@ -106,6 +107,7 @@ const store = new Store({
   sources: [],
   radar: null,
   radarSamples: null,
+  radarDetail: null,
   metmy: null,
   health: [],
   evals: [],
@@ -395,8 +397,10 @@ function evaluate(rescanBest: boolean): void {
   if (!s.stretches.length || !s.sources.length) return;
   const nowMs = Date.now();
   // Radar older than 30 min (e.g. restored offline) must not bump anything.
-  const radar = s.radarSamples && s.radarSampleMs && nowMs - s.radarSampleMs <= 30 * MIN ? s.radarSamples : null;
-  const run = (d: number) => evaluateTrip(s.stretches, d, s.sources, radar, nowMs);
+  const fresh = !!s.radarSampleMs && nowMs - s.radarSampleMs <= 30 * MIN;
+  const radar = fresh ? s.radarSamples : null;
+  const radarDetail = fresh ? s.radarDetail : null;
+  const run = (d: number) => evaluateTrip(s.stretches, d, s.sources, radar, nowMs, radarDetail);
   const evals = run(s.departMs);
   const summary = summarize(evals);
   const patch: Partial<AppState> = { evals, summary, nowMs };
@@ -417,6 +421,7 @@ interface Stored {
   sources: SourceResult[];
   radar: RadarIndex | null;
   radarSamples: RadarSample[] | null;
+  radarDetail?: RadarDetail[] | null;
   radarSampleMs: number | null;
   metmy: { forecasts: MetMyForecast[]; warnings: MetMyWarning[] } | null;
   health: SourceHealth[];
@@ -433,7 +438,7 @@ async function load(force = false): Promise<void> {
     lastLoadKey = '';
     routeSig = '';
     routeMap.clearRoute();
-    store.set({ phase: 'empty', error: null, route: null, stretches: [], sources: [], evals: [], summary: null, bestRows: [], best: null, selected: null, radarSamples: null, health: [] });
+    store.set({ phase: 'empty', error: null, route: null, stretches: [], sources: [], evals: [], summary: null, bestRows: [], best: null, selected: null, radarSamples: null, radarDetail: null, health: [] });
     return;
   }
   const key = routeKey(s0);
@@ -500,6 +505,7 @@ async function load(force = false): Promise<void> {
     sources,
     radar: rv?.index ?? null,
     radarSamples: null,
+    radarDetail: null,
     radarSampleMs: null,
     metmy: my ? { forecasts: my.forecasts, warnings: my.warnings } : null,
     health,
@@ -511,13 +517,14 @@ async function load(force = false): Promise<void> {
   evaluate(true);
   void persist(key);
 
-  // Radar sampling is async and optional: it can only bump stretches within 90 min.
+  // Radar sampling is async and optional: it can raise stretches within 90 min, and lower ones within 40 min
+  // when the radar is clear there now.
   const latestFrame = rv?.index?.frames.filter((f) => f.kind === 'past').at(-1);
   if (rv?.index && latestFrame && Date.now() - latestFrame.time <= 30 * MIN) {
     try {
-      const samples = await sampleRadar(rv.index, points, browserImageLoader);
+      const [samples, detail] = await Promise.all([sampleRadar(rv.index, points, browserImageLoader), sampleRadarDetail(rv.index, points, browserImageLoader)]);
       if (seq !== loadSeq) return;
-      store.set({ radarSamples: samples, radarSampleMs: latestFrame.time });
+      store.set({ radarSamples: samples, radarDetail: detail, radarSampleMs: latestFrame.time });
       evaluate(true);
       void persist(key);
     } catch {
@@ -537,6 +544,7 @@ async function persist(key: string): Promise<void> {
     sources: s.sources,
     radar: s.radar,
     radarSamples: s.radarSamples,
+    radarDetail: s.radarDetail,
     radarSampleMs: s.radarSampleMs,
     metmy: s.metmy,
     health: s.health,
@@ -564,6 +572,7 @@ async function restoreOrFail(
       sources: rec.sources,
       radar: rec.radar,
       radarSamples: rec.radarSamples,
+      radarDetail: rec.radarDetail ?? null,
       radarSampleMs: rec.radarSampleMs ?? null,
       metmy: rec.metmy,
       health: health.length > 1 ? health : rec.health.map((h) => ({ ...h, state: h.state === 'ok' ? 'degraded' : h.state, reason: `offline · saved ${formatHHMM(rec.fetchedAt)}` })),
@@ -797,7 +806,8 @@ function mountFoot(): void {
   const howBtn = el('button', { type: 'button', class: 'foot-btn', id: 'foot-how', onclick: () => settings.open('about') }, 'How this works');
   const fb = mountFeedback();
   const sep = () => el('span', { class: 'foot-sep', 'aria-hidden': 'true', text: '·' });
-  footSec.append(srcBtn, sep(), howBtn, sep(), fb.button);
+  const ver = el('span', { class: 'foot-ver num', id: 'app-version', title: `RainCheck ${APP_VERSION}`, text: versionLabel() });
+  footSec.append(srcBtn, sep(), howBtn, sep(), fb.button, sep(), ver);
   on(store, ['health'], (s) => {
     srcBtn.textContent = '';
     const bad = s.health.filter((h) => h.state === 'failed').length;

@@ -134,6 +134,17 @@ Record each real commute here to compare the verdict with what you saw.
 |  |  |  |  |  |
 |  |  |  |  |  |
 
+## Changelog
+
+### 1.0 (2026-11-24)
+
+- First versioned release. The version shows in the panel footer and in "How this works".
+- Verdict rule v2: radar can now also lower a stretch. If you reach it within 40 min and the latest radar frame
+  shows no rain within about 4 km, the forecast drops one level. The models often get a storm right but its
+  timing an hour off, and kept saying "rain" after it had passed.
+- New note: when the radar showed rain near the route in the last hour but is clear now, the answer says
+  "Rain just ended near … – roads may be wet".
+
 ## More documentation
 
 - [DEPLOY.md](DEPLOY.md): server deployment runbook

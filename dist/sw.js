@@ -1,8 +1,8 @@
 // RainCheck service worker: offline app shell. Weather data is NOT cached here: the app keeps
 // its last result in IndexedDB and labels it "Offline – showing HH:MM result".
-const VERSION = 'raincheck-shell-00db98255c'; // replaced at build with a content hash
+const VERSION = 'raincheck-shell-478afbf59e'; // replaced at build with a content hash
 const SHELL = ['/', '/index.html', '/manifest.webmanifest', '/icon.svg', '/icon-192.png', '/icon-512.png'];
-const ASSETS = ["/assets/barlow-condensed-latin-500-normal-BgYH2mbd.woff2","/assets/barlow-condensed-latin-500-normal-HIEiP5Ov.woff","/assets/barlow-condensed-latin-600-normal-BFJEwTuo.woff","/assets/barlow-condensed-latin-600-normal-DepVgxBB.woff2","/assets/barlow-condensed-latin-700-normal-Dmwat-ge.woff","/assets/barlow-condensed-latin-700-normal-v1xN8_Wq.woff2","/assets/index-BahwZ9AY.js","/assets/index-DaUPDNS2.css","/assets/maplibre-BS3NeydQ.js","/assets/maplibre-gl-CVpPnWVS.js","/assets/maplibre-gl-DNVN2dqC.css"]; // filled by scripts/precache.mjs after `vite build`
+const ASSETS = ["/assets/barlow-condensed-latin-500-normal-BgYH2mbd.woff2","/assets/barlow-condensed-latin-500-normal-HIEiP5Ov.woff","/assets/barlow-condensed-latin-600-normal-BFJEwTuo.woff","/assets/barlow-condensed-latin-600-normal-DepVgxBB.woff2","/assets/barlow-condensed-latin-700-normal-Dmwat-ge.woff","/assets/barlow-condensed-latin-700-normal-v1xN8_Wq.woff2","/assets/index-Bh92WYhl.js","/assets/index-Dx8iYEOc.css","/assets/maplibre-BS3NeydQ.js","/assets/maplibre-gl-CVpPnWVS.js","/assets/maplibre-gl-DNVN2dqC.css"]; // filled by scripts/precache.mjs after `vite build`
 
 self.addEventListener('install', (e) => {
   e.waitUntil(

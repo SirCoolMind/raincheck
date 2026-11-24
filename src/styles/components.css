@@ -2372,6 +2372,11 @@ select:focus-visible {
 .foot-sep {
   color: var(--ink-3);
 }
+.foot-ver {
+  color: var(--ink-3);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+}
 .foot-btn .st {
   width: 8px;
   height: 8px;

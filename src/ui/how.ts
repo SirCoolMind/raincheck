@@ -1,11 +1,12 @@
 // "How this works": the versioned verdict rule in plain language, plus attribution. Shown in Settings → About.
 import { el } from './dom';
-import { RULE_VERSION, RAIN_MMH, HEAVY_MMH, RADAR_WINDOW_MIN } from '../core/verdict';
+import { versionLabel } from '../version';
+import { RULE_VERSION, RAIN_MMH, HEAVY_MMH, RADAR_WINDOW_MIN, RADAR_CLEAR_WINDOW_MIN } from '../core/verdict';
 
 export function mountHow(root: HTMLElement): void {
   const d = el('div', { class: 'how' });
   d.append(
-    el('h3', { class: 'set-h', text: `How this works (rule ${RULE_VERSION})` }),
+    el('h3', { class: 'set-h', text: `How this works (RainCheck ${versionLabel()}, rule ${RULE_VERSION})` }),
     el('p', {
       text: 'Your drive is cut into ~5-minute stretches. Each stretch gets the forecast for the time you reach it, not for now. Drive times come from OSRM road speeds, scaled so the whole trip takes your trip length (by default the route driving time plus 25% for traffic).',
     }),
@@ -17,6 +18,7 @@ export function mountHow(root: HTMLElement): void {
       el('li', { text: 'Possible: some sources are wet, but fewer than half. Rain: half or more are wet. Heavy: more than half are heavy.' }),
       el('li', { text: 'Confidence “4/6” = sources backing the verdict / sources that returned data.' }),
       el('li', { text: `If you reach a stretch within ${RADAR_WINDOW_MIN} min and the latest radar frame shows rain there, it is raised one level.` }),
+      el('li', { text: `If you reach a stretch within ${RADAR_CLEAR_WINDOW_MIN} min and the latest radar frame shows no rain within about 4 km, it is lowered one level: the models often get a storm right but its timing wrong. If the radar showed rain there in the hour before, the answer says the rain just ended and roads may be wet.` }),
       el('li', { text: 'MET Malaysia district forecasts are shown as context only. They do not vote.' }),
     ),
     el('p', {

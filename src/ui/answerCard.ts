@@ -55,8 +55,9 @@ export function mountAnswer(root: HTMLElement, store: Store, onRetry: () => void
     const thin = sum.total > 0 && sum.total < 3 && sum.level !== 'dry';
     const headline = thin ? `Likely ${sum.sentence.charAt(0).toLowerCase()}${sum.sentence.slice(1)}` : sum.sentence;
     setText(sentence, headline);
-    setText(detail, sum.detail || routeLine(s));
-    detail.classList.toggle('route-only', !sum.detail);
+    const second = [sum.note, sum.detail].filter(Boolean).join(' · ');
+    setText(detail, second || routeLine(s));
+    detail.classList.toggle('route-only', !second);
     detail.hidden = false;
 
     const down = s.health.filter((h) => h.state === 'failed' && h.id !== 'radar' && h.id !== 'metmy' && h.id !== 'route' && h.id !== 'map').length;

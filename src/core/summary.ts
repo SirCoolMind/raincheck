@@ -52,7 +52,10 @@ function buildWindows(evals: StretchEval[]): Window[] {
     }
     let j = i;
     let level: Level = evals[i]!.verdict.level;
-    while (j + 1 < evals.length && isWet(evals[j + 1]!.verdict.level)) {
+    // A radar-lowered run (clear now) and the forecast rain after it are separate windows, so the headline
+    // names the rain still to come instead of "the whole drive".
+    const lowered = !!evals[i]!.verdict.radarLowered;
+    while (j + 1 < evals.length && isWet(evals[j + 1]!.verdict.level) && !!evals[j + 1]!.verdict.radarLowered === lowered) {
       j++;
       const l = evals[j]!.verdict.level;
       if (levelRank(l) > levelRank(level)) level = l;
@@ -70,7 +73,20 @@ function buildWindows(evals: StretchEval[]): Window[] {
   return windows;
 }
 
+/** What the radar says about the next few minutes, or '' (see RADAR_CLEAR_WINDOW_MIN). */
+export function radarNote(evals: StretchEval[]): string {
+  const ended = evals.find((e) => e.verdict.justEnded);
+  if (ended) return `Rain just ended near ${ended.stretch.place} – roads may be wet`;
+  const cleared = evals.find((e) => e.verdict.radarLowered);
+  if (cleared) return `Radar is clear near ${cleared.stretch.place} right now`;
+  return '';
+}
+
 export function summarize(evals: StretchEval[]): Summary {
+  return { ...summarizeForecast(evals), note: radarNote(evals) };
+}
+
+function summarizeForecast(evals: StretchEval[]): Summary {
   const windows = buildWindows(evals);
   const n = evals.length;
   const withData = evals.filter((e) => e.verdict.level !== 'nodata');

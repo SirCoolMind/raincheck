@@ -6,7 +6,7 @@ import { icon } from './icons';
 import { formatRange, formatHHMM } from '../core/timing';
 import { levelLabel } from '../core/summary';
 import { formatMmh, formatProb } from '../core/format';
-import { RAIN_MMH, RADAR_WINDOW_MIN } from '../core/verdict';
+import { RAIN_MMH, RADAR_CLEAR_WINDOW_MIN, RADAR_WINDOW_MIN } from '../core/verdict';
 import { glossMalay } from '../sources/metmy';
 
 // ───────────── Sheet drag ─────────────
@@ -126,14 +126,25 @@ export function mountDetail(root: HTMLElement, store: Store, actions: Actions): 
     });
     const radar = s.radarSamples?.[i] ?? null;
     const minsAway = Math.round((ev.eta.midMs - s.nowMs) / 60000);
+    const det = s.radarDetail?.[i] ?? null;
     const radarText =
-      radar === null ? 'unknown' : radar ? 'rain at this point now' : 'no rain at this point now';
+      radar === null
+        ? 'unknown'
+        : radar
+          ? 'rain at this point now'
+          : det?.clear
+            ? det.recentWet
+              ? 'clear now, rained here in the last hour (roads may be wet)'
+              : 'clear within ~4 km now'
+            : 'no rain at this point now';
+    const radarCan =
+      minsAway <= RADAR_CLEAR_WINDOW_MIN ? 'radar can raise or lower this stretch' : minsAway <= RADAR_WINDOW_MIN ? 'radar can raise this stretch' : 'too far ahead for radar';
     tbody.append(
       el(
         'tr',
         { class: radar ? 'wet' : radar === false ? 'dry' : '' },
-        el('th', { scope: 'row' }, 'Radar (latest frame)', el('small', { text: minsAway < 0 ? `ETA was ${-minsAway} min ago: radar can raise this stretch` : minsAway <= RADAR_WINDOW_MIN ? `ETA in ${minsAway} min: radar can raise this stretch` : `ETA in ${minsAway} min: too far ahead for radar` })),
-        el('td', { colspan: '2', style: 'font-family:var(--font-body);font-size:14px', text: radarText + (v.radarBumped ? ' · raised one level' : '') }),
+        el('th', { scope: 'row' }, 'Radar (latest frame)', el('small', { text: minsAway < 0 ? `ETA was ${-minsAway} min ago: ${radarCan}` : `ETA in ${minsAway} min: ${radarCan}` })),
+        el('td', { colspan: '2', style: 'font-family:var(--font-body);font-size:14px', text: radarText + (v.radarBumped ? ' · raised one level' : v.radarLowered ? ' · lowered one level' : '') }),
       ),
     );
     root.append(
@@ -165,7 +176,7 @@ export function mountDetail(root: HTMLElement, store: Store, actions: Actions): 
       );
     }
   };
-  on(store, ['selected', 'hovered', 'evals', 'radarSamples', 'metmy'], render);
+  on(store, ['selected', 'hovered', 'evals', 'radarSamples', 'radarDetail', 'metmy'], render);
 }
 
 function mytDate(ms: number): string {

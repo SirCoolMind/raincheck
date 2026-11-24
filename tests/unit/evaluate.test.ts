@@ -94,4 +94,13 @@ describe('evaluateTrip', () => {
     ev = evaluateTrip(stretches, t0, sources, null, t0);
     expect(ev.every((e) => e.verdict.level === 'dry')).toBe(true);
   });
+  it('clear radar lowers only stretches reached within 40 min', () => {
+    const sources = [src('metno', [wet, wet, wet, wet])]; // mids at +7.5, 22.5, 37.5, 52.5 min
+    const detail = [0, 1, 2, 3].map(() => ({ clear: true, recentWet: false }));
+    const ev = evaluateTrip(stretches, t0, sources, [false, false, false, false], t0, detail);
+    expect(ev.map((e) => e.verdict.level)).toEqual(['possible', 'possible', 'possible', 'rain']);
+    expect(ev[3]!.verdict.radarLowered).toBe(false);
+    // no detail → unchanged (old behaviour)
+    expect(evaluateTrip(stretches, t0, sources, [false, false, false, false], t0).every((e) => e.verdict.level === 'rain')).toBe(true);
+  });
 });

@@ -177,5 +177,5 @@ function cellLabel(ev: import('../core/types').StretchEval): string {
   const v = ev.verdict;
   return `${formatRange(ev.eta.startMs, ev.eta.endMs)}, ${ev.stretch.place}: ${levelLabel(v.level)}${
     v.maxMmh !== null ? `, up to ${formatMmh(v.maxMmh)}` : ''
-  }${v.radarBumped ? ', raised by radar' : ''}. ${v.total ? `${v.agree} of ${v.total} sources agree.` : ''}`;
+  }${v.radarBumped ? ', raised by radar' : v.radarLowered ? ', lowered by radar (clear now)' : ''}. ${v.total ? `${v.agree} of ${v.total} sources agree.` : ''}`;
 }

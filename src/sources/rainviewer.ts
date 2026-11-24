@@ -1,7 +1,7 @@
 // RainViewer: radar frame index + point sampling from a 256px tile (alpha > 0 = echo).
 import { ENDPOINTS } from '../config';
 import { tileFor } from '../core/geo';
-import type { LatLon, RadarFrame, RadarIndex, RadarSample, SourceHealth } from '../core/types';
+import type { LatLon, RadarDetail, RadarFrame, RadarIndex, RadarSample, SourceHealth } from '../core/types';
 import { cachedReason, errReason, fetchViaProxyOrDirect, type FetchTune } from './http';
 
 /** The free tier caps tile zoom at 7. */
@@ -95,6 +95,57 @@ export async function sampleRadar(index: RadarIndex, points: LatLon[], loadImage
       const py = Math.min(img.height - 1, Math.max(0, Math.round((t.py / 256) * img.height - 0.5)));
       const a = img.data[(py * img.width + px) * 4 + 3];
       return a === undefined ? null : a > 0;
+    }),
+  );
+}
+
+const MIN_MS = 60_000;
+
+/**
+ * Per point, from the zoom-7 tiles (≈1.2 km per pixel in Malaysia):
+ * - clear: the latest frame has no echo in a box of ±`radiusPx` pixels (≈ ±4 km) around the point;
+ * - recentWet: any echo in that box in the frames of the hour before the latest one.
+ * null when the tiles cannot be read. Each tile of each frame is loaded once.
+ */
+export async function sampleRadarDetail(index: RadarIndex, points: LatLon[], loadImage: ImageLoader, radiusPx = 3): Promise<RadarDetail[]> {
+  const past = index.frames.filter((f) => f.kind === 'past');
+  const latest = past[past.length - 1];
+  if (!latest) return points.map(() => ({ clear: null, recentWet: null }));
+  const earlier = past.filter((f) => f !== latest && f.time >= latest.time - 60 * MIN_MS);
+  const refs = points.map((p) => tileFor(p, MAX_ZOOM));
+  const cache = new Map<string, Promise<ImageLike | null>>();
+  const load = (frame: RadarFrame, t: { x: number; y: number }) => {
+    const url = tileUrl(index.host, frame, MAX_ZOOM, t.x, t.y);
+    if (!cache.has(url)) cache.set(url, loadImage(url).catch(() => null));
+    return cache.get(url)!;
+  };
+  // true = echo in the box, false = none, null = unreadable
+  const boxWet = (img: ImageLike | null, t: { px: number; py: number }): boolean | null => {
+    if (!img) return null;
+    const s = img.width / 256;
+    const r = Math.max(1, Math.round(radiusPx * s));
+    const cx = Math.round(t.px * s);
+    const cy = Math.round(t.py * s);
+    for (let y = Math.max(0, cy - r); y <= Math.min(img.height - 1, cy + r); y++) {
+      for (let x = Math.max(0, cx - r); x <= Math.min(img.width - 1, cx + r); x++) {
+        if ((img.data[(y * img.width + x) * 4 + 3] ?? 0) > 0) return true;
+      }
+    }
+    return false;
+  };
+  return Promise.all(
+    refs.map(async (t) => {
+      const now = boxWet(await load(latest, t), t);
+      let recentWet: boolean | null = null;
+      for (const f of earlier) {
+        const w = boxWet(await load(f, t), t);
+        if (w === true) {
+          recentWet = true;
+          break;
+        }
+        if (w === false) recentWet = false;
+      }
+      return { clear: now === null ? null : !now, recentWet };
     }),
   );
 }

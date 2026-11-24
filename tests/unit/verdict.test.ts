@@ -3,6 +3,7 @@ import type { Level, SourceId, Vote } from '../../src/core/types';
 import {
   HEAVY_MMH,
   LEVEL_ORDER,
+  RADAR_CLEAR_WINDOW_MIN,
   RADAR_WINDOW_MIN,
   RAIN_MMH,
   RULE_VERSION,
@@ -11,6 +12,7 @@ import {
   judge,
   levelOf,
   levelRank,
+  lower,
 } from '../../src/core/verdict';
 
 const votes = (...v: (number | null)[]): Vote[] => v.map((mmh, i) => ({ source: `s${i}` as SourceId, mmh, prob: null }));
@@ -18,7 +20,8 @@ const noRadar = { wet: null, withinWindow: false };
 
 describe('constants / helpers', () => {
   it('constants', () => {
-    expect(RULE_VERSION).toBe('v1');
+    expect(RULE_VERSION).toBe('v2');
+    expect(RADAR_CLEAR_WINDOW_MIN).toBe(40);
     expect(RAIN_MMH).toBe(0.4);
     expect(HEAVY_MMH).toBe(4);
     expect(RADAR_WINDOW_MIN).toBe(90);
@@ -110,5 +113,47 @@ describe('judge', () => {
     expect(h.baseLevel).toBe('rain');
     expect(h.level).toBe('heavy');
     expect(h.agree).toBe(2);
+  });
+});
+
+describe('clear radar lowers near-term stretches (rule v2)', () => {
+  const clear = (recentWet: boolean | null = false, withinClearWindow = true) => ({ wet: false, withinWindow: true, clear: true, recentWet, withinClearWindow });
+  it('lower is the opposite of bump', () => {
+    expect(lower('heavy')).toBe('rain');
+    expect(lower('rain')).toBe('possible');
+    expect(lower('possible')).toBe('dry');
+    expect(lower('dry')).toBe('dry');
+    expect(lower('nodata')).toBe('nodata');
+  });
+  it('models say rain, radar clear now → one level drier, sources backing the new claim', () => {
+    const v = judge(votes(1, 1, 1, 0), clear());
+    expect(v.baseLevel).toBe('rain');
+    expect(v.level).toBe('possible');
+    expect(v.radarLowered).toBe(true);
+    expect(v.radarBumped).toBe(false);
+    expect(v.justEnded).toBe(false);
+    expect(v.agree).toBe(3);
+    const p = judge(votes(1, 0, 0), clear());
+    expect(p.level).toBe('dry');
+    expect(p.agree).toBe(2);
+  });
+  it('rained in the last hour, clear now → just ended', () => {
+    const v = judge(votes(1, 1), clear(true));
+    expect(v.level).toBe('possible');
+    expect(v.justEnded).toBe(true);
+    // models already dry: nothing to lower, but the wet-road note still applies
+    const d = judge(votes(0, 0), clear(true));
+    expect(d.level).toBe('dry');
+    expect(d.radarLowered).toBe(false);
+    expect(d.justEnded).toBe(true);
+  });
+  it('no lowering outside the window, with unknown or wet radar', () => {
+    expect(judge(votes(1, 1), clear(false, false)).level).toBe('rain');
+    expect(judge(votes(1, 1), { wet: false, withinWindow: true, clear: null, withinClearWindow: true }).level).toBe('rain');
+    expect(judge(votes(1, 1), { wet: false, withinWindow: true, clear: false, withinClearWindow: true }).level).toBe('rain');
+    // rain at the point now still raises, never lowers
+    const b = judge(votes(1, 1), { wet: true, withinWindow: true, clear: false, withinClearWindow: true });
+    expect(b.level).toBe('heavy');
+    expect(b.radarLowered).toBe(false);
   });
 });

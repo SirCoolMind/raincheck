@@ -102,3 +102,28 @@ describe('summarize', () => {
     expect([s.agree, s.total]).toEqual([5, 6]);
   });
 });
+
+describe('radar note', () => {
+  it('just ended wins over cleared; none → empty', () => {
+    const evals = mk(['possible', 'dry', 'dry']);
+    expect(summarize(evals).note).toBe('');
+    evals[0]!.verdict.radarLowered = true;
+    expect(summarize(evals).note).toBe('Radar is clear near P0 right now');
+    evals[1]!.verdict.justEnded = true;
+    expect(summarize(evals).note).toBe('Rain just ended near P1 – roads may be wet');
+  });
+});
+
+describe('radar-lowered stretches form their own window', () => {
+  it('headline names the rain still to come', () => {
+    const evals = mk(['possible', 'possible', 'rain', 'rain'], { mm: { 2: 2, 3: 2 } });
+    evals[0]!.verdict.radarLowered = true;
+    evals[1]!.verdict.radarLowered = true;
+    evals[0]!.verdict.justEnded = true;
+    const s = summarize(evals);
+    expect(s.windows).toHaveLength(2);
+    expect(s.sentence).toMatch(/^Rain 08:10–08:20 near P[23]$/);
+    expect(s.detail).toBe('Also possible rain 08:00 near P0');
+    expect(s.note).toBe('Rain just ended near P0 – roads may be wet');
+  });
+});
