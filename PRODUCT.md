@@ -23,7 +23,7 @@ one-glance answer the user trusts enough to change their departure time or take 
 
 ## Positioning
 Weather apps forecast a place at a time; RainCheck forecasts the *journey*: each ~5-minute stretch gets the
-forecast for the moment the driver reaches it, voted across six models plus live radar, with the disagreement
+forecast for the moment the driver reaches it, voted across five models plus live radar, with the disagreement
 shown rather than hidden.
 
 ## Operating Context

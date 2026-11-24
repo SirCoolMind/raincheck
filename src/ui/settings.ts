@@ -280,7 +280,7 @@ function sources(root: HTMLElement, store: Store): void {
   const list = el('ul', { class: 'src-list', 'aria-labelledby': 'src-h' });
   root.append(
     el('h3', { class: 'set-h', id: 'src-h' }, 'Data sources', sub),
-    el('p', { class: 'note set-lead', text: 'Six weather models vote on each stretch. Radar can raise a stretch close to your ETA. MET Malaysia is shown as context and does not vote.' }),
+    el('p', { class: 'note set-lead', text: 'Five weather models vote on each stretch. Radar can raise or lower a stretch close to your ETA. MET Malaysia is shown as context and does not vote.' }),
     list,
   );
   on(store, ['health'], (s) => {
