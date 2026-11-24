@@ -128,10 +128,19 @@ export function mountAgreement(root: HTMLElement, store: Store, actions: Actions
     if (focus === null) return;
     grid.querySelectorAll(`[data-col="${focus}"]`).forEach((n) => n.classList.add('col-on'));
   };
-  on(store, ['evals', 'sources', 'radarSamples', 'phase'], () => {
-    render();
+  // The matrix is sources × stretches buttons (~400 nodes): only build it while it is open, and catch up on open.
+  let stale = true;
+  const refresh = () => {
+    if (f.isOpen()) {
+      render();
+      mark();
+      stale = false;
+    } else stale = true;
     setSub();
-    mark();
+  };
+  f.onChange((open) => {
+    if (open && stale) refresh();
   });
+  on(store, ['evals', 'sources', 'radarSamples', 'phase'], refresh);
   on(store, ['selected', 'hovered'], mark, false);
 }

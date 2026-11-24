@@ -224,7 +224,8 @@ async function loadTilePixels(url: string): Promise<ImageLike | null> {
     const bmp = await createImageBitmap(await res.blob());
     const canvas: OffscreenCanvas | HTMLCanvasElement =
       typeof OffscreenCanvas !== 'undefined' ? new OffscreenCanvas(bmp.width, bmp.height) : Object.assign(document.createElement('canvas'), { width: bmp.width, height: bmp.height });
-    const ctx = canvas.getContext('2d') as OffscreenCanvasRenderingContext2D | CanvasRenderingContext2D | null;
+    // willReadFrequently keeps the canvas on the CPU, so getImageData is a copy instead of a GPU read-back.
+    const ctx = canvas.getContext('2d', { willReadFrequently: true }) as OffscreenCanvasRenderingContext2D | CanvasRenderingContext2D | null;
     if (!ctx) return null;
     ctx.drawImage(bmp, 0, 0);
     const d = ctx.getImageData(0, 0, bmp.width, bmp.height);

@@ -4,7 +4,7 @@
 import type { Map as MlMap, GeoJSONSource } from 'maplibre-gl';
 import type { Store } from '../state';
 import { on } from '../state';
-import { el, prefersReducedMotion } from './dom';
+import { cssVar, el, prefersReducedMotion } from './dom';
 import type { RouteMap } from './map';
 import { rasterTemplate } from '../sources/rainviewer';
 import { fetchWind, windAt, meanWind, compass, type Bounds, type WindGrid } from '../sources/wind';
@@ -21,9 +21,6 @@ export interface WindMap {
   setOpacity(o: number): void;
 }
 
-function cssVar(name: string, fallback: string): string {
-  return getComputedStyle(document.documentElement).getPropertyValue(name).trim() || fallback;
-}
 
 export function mountWindMap(root: HTMLElement, store: Store, routeMap: RouteMap): WindMap {
   const mapBox = el('div', { class: 'wm-map', id: 'wind-map' });

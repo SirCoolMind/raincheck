@@ -21,6 +21,7 @@ export default defineConfig({
   build: {
     target: 'es2022',
     sourcemap: false,
+    minify: process.env.RC_NOMINIFY ? false : 'esbuild',
     rollupOptions: {
       output: { manualChunks: { maplibre: ['maplibre-gl'] } },
     },

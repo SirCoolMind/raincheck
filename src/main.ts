@@ -205,6 +205,9 @@ const routeMap = new RouteMap(mapEl, {
   },
 });
 
+/** Pending once-per-frame scrub evaluation (see setDepart). */
+let scrubRaf = 0;
+
 const actions: Actions = {
   select: (i) => {
     store.set({ selected: i });
@@ -217,7 +220,13 @@ const actions: Actions = {
     const s = store.get();
     const clamped = Math.max(s.baseMs - SCRUB_RANGE_MIN * MIN, Math.min(s.baseMs + SCRUB_RANGE_MIN * MIN, ms));
     store.set({ departMs: clamped, nowMs: Date.now() });
-    evaluate(false); // local re-evaluation only — no refetch
+    // Local re-evaluation only (no refetch), at most once per frame: dragging the slider fires many inputs per frame.
+    if (!scrubRaf) {
+      scrubRaf = requestAnimationFrame(() => {
+        scrubRaf = 0;
+        evaluate(false);
+      });
+    }
   },
   setPreset: (id) => {
     const s = store.get();
@@ -392,7 +401,12 @@ function setHealth(h: SourceHealth): void {
 }
 
 // ───────────── evaluate (pure, local) ─────────────
+
 function evaluate(rescanBest: boolean): void {
+  if (scrubRaf) {
+    cancelAnimationFrame(scrubRaf); // this evaluation covers the pending scrub too
+    scrubRaf = 0;
+  }
   const s = store.get();
   if (!s.stretches.length || !s.sources.length) return;
   const nowMs = Date.now();

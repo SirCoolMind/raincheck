@@ -163,15 +163,19 @@ export function mountRadar(root: HTMLElement, store: Store, map: RouteMap, onFra
     setStatus();
     drawFrames();
     if (!r || !key) return;
-    void radarCoverage(r, pts, browserImageLoader)
-      .then((c) => {
-        if (covKey !== key) return;
-        coverage = c;
-        drawFrames();
-        setStatus();
-        if (idx >= 0 && !playing) show(idx);
-      })
-      .catch(() => undefined);
+    // Up to 13 frames × 6 tiles to decode: wait until the first answer has painted and the page is idle.
+    whenIdle(() => {
+      if (covKey !== key) return;
+      void radarCoverage(r, pts, browserImageLoader)
+        .then((c) => {
+          if (covKey !== key) return;
+          coverage = c;
+          drawFrames();
+          setStatus();
+          if (idx >= 0 && !playing) show(idx);
+        })
+        .catch(() => undefined);
+    });
   };
 
   const render = () => {
@@ -206,6 +210,11 @@ export function mountRadar(root: HTMLElement, store: Store, map: RouteMap, onFra
     time.append(el('small', { text: store.get().phase === 'loading' ? 'loading radar…' : 'radar unavailable' }));
     onFrameTime(null);
   }, false);
+}
+
+function whenIdle(cb: () => void): void {
+  if (typeof requestIdleCallback === 'function') requestIdleCallback(cb, { timeout: 3000 });
+  else setTimeout(cb, 500);
 }
 
 function pct(c: number): string {

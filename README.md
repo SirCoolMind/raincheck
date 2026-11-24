@@ -136,6 +136,14 @@ Record each real commute here to compare the verdict with what you saw.
 
 ## Changelog
 
+### 1.2.1 (2026-11-24)
+
+- Faster on phones and weak PCs, same look. Theme colours are read once per theme instead of once per route
+  stretch per re-render; the slider re-evaluates at most once per frame; "Do the sources agree?" and the departure
+  calendar are only built while open; radar tiles are read from a CPU canvas; the radar panel's per-frame rain
+  bars are measured when the page is idle. On a 6× slowed phone this cut the app's own JS time by about a third
+  and slider blocking time by about half.
+
 ### 1.2 (2026-11-24)
 
 - Five voters instead of six: Open-Meteo "best match" is removed. It is built from the same models that already

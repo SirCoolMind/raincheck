@@ -7,7 +7,7 @@ import type { Waypoint } from '../config';
 import type { LonLat, RadarFrame, RadarIndex, StretchEval } from '../core/types';
 import { CARTO_STYLES, transformCarto, type CartoMode } from './cartoUrl';
 import { rasterTemplate, MAX_ZOOM as RADAR_MAX_ZOOM } from '../sources/rainviewer';
-import { el } from './dom';
+import { cssVar, el } from './dom';
 import { icon } from './icons';
 
 export interface MapCallbacks {
@@ -31,9 +31,6 @@ if (import.meta.env.VITE_CARTO_MODE !== 'proxy' && import.meta.env.VITE_CARTO_MO
   KEY = (import.meta.env.VITE_CARTO_API_KEY as string | undefined) ?? '';
 }
 
-function cssVar(name: string): string {
-  return getComputedStyle(document.documentElement).getPropertyValue(name).trim() || '#888';
-}
 
 function levelColor(level: string): string {
   return (level === 'dry' && cssVar('--route-dry') !== '#888' ? cssVar('--route-dry') : '') || cssVar(`--v-${level}`);

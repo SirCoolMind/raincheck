@@ -64,3 +64,22 @@ export function normHHMM(v: string): string | null {
   const mm = r === 60 ? 55 : r;
   return `${String(h).padStart(2, '0')}:${String(mm).padStart(2, '0')}`;
 }
+
+// CSS custom properties, cached per theme: getComputedStyle forces a style recalc, and the maps ask for colours
+// once per route stretch on every re-render (that was ~1 s of main-thread time on a slow phone).
+const cssCache = new Map<string, string>();
+let cssCacheKey = '';
+export function cssVar(name: string, fallback = '#888'): string {
+  const root = document.documentElement;
+  const key = `${root.getAttribute('data-theme') ?? ''}|${typeof matchMedia === 'function' && matchMedia('(prefers-color-scheme: dark)').matches}`;
+  if (key !== cssCacheKey) {
+    cssCache.clear();
+    cssCacheKey = key;
+  }
+  let v = cssCache.get(name);
+  if (v === undefined) {
+    v = getComputedStyle(root).getPropertyValue(name).trim();
+    cssCache.set(name, v);
+  }
+  return v || fallback;
+}

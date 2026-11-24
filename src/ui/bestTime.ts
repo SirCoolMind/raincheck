@@ -30,6 +30,7 @@ export function mountBestTime(root: HTMLElement, store: Store, actions: Actions)
   });
 
   let showPast = false;
+  let calStale = true;
   const render = () => {
     const s = store.get();
     clear(chip);
@@ -75,6 +76,9 @@ export function mountBestTime(root: HTMLElement, store: Store, actions: Actions)
       spark(rows, max, isCur ? null : (best?.departMs ?? null), cur.departMs),
     );
     chip.prepend(el('span', { class: 'vh', text: 'Best time to leave: ' }));
+    // The calendar rows (~13 × stretches) are only built while it is open; opening it catches up.
+    calStale = !calFold.isOpen();
+    if (calStale) return;
     const n = s.evals.length || 12;
     grid.append(
       el(
@@ -124,6 +128,9 @@ export function mountBestTime(root: HTMLElement, store: Store, actions: Actions)
     }
   };
   on(store, ['bestRows', 'best', 'departMs', 'phase'], render);
+  calFold.onChange((open) => {
+    if (open && calStale) render();
+  });
 }
 
 function spark(rows: { departMs: number; wetMin: number }[], max: number, best: number | null, cur: number): SVGSVGElement {
