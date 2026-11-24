@@ -2,7 +2,7 @@
 const ORIGIN = 'http://localhost:5173';
 const UA = 'RainCheckDailyCommute/1.0 (+https://github.com/example/raincheck-daily-commute)';
 const calls = [
-  ['Open-Meteo', 'https://api.open-meteo.com/v1/forecast?latitude=2.9226,3.1579&longitude=101.651,101.7123&minutely_15=precipitation&hourly=precipitation_probability,precipitation&models=best_match,ecmwf_ifs025,gfs_seamless,icon_seamless,jma_seamless&timezone=Asia%2FKuala_Lumpur&forecast_days=2&past_days=0', {}],
+  ['Open-Meteo', 'https://api.open-meteo.com/v1/forecast?latitude=2.9226,3.1579&longitude=101.651,101.7123&minutely_15=precipitation&hourly=precipitation_probability,precipitation&models=ecmwf_ifs025,gfs_seamless,icon_seamless,jma_seamless&timezone=Asia%2FKuala_Lumpur&forecast_days=2&past_days=0', {}],
   ['MET Norway', 'https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=2.8&lon=101.65', { 'User-Agent': UA }],
   ['MET MY forecast', 'https://api.data.gov.my/weather/forecast/?contains=Sepang@location__location_name', {}],
   ['MET MY warning', 'https://api.data.gov.my/weather/warning/?limit=5', {}],

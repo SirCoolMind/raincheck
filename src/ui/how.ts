@@ -14,7 +14,7 @@ export function mountHow(root: HTMLElement): void {
       'ol',
       {},
       el('li', { text: `A source is wet at ≥ ${RAIN_MMH} mm/h and heavy at ≥ ${HEAVY_MMH} mm/h. ${LIGHT_MMH}–${RAIN_MMH} mm/h (0.1–0.2 mm per 15 min, the smallest step the models report) is only light: the models spread it over whole areas in the tropics, and it is often no rain at all where you are.` }),
-      el('li', { text: 'No data: no source returned a value. Heavy: more than half are heavy. Rain: more than half are wet (3 of 6 is not enough).' }),
+      el('li', { text: 'No data: no source returned a value. Heavy: more than half are heavy. Rain: more than half are wet (3 of 5).' }),
       el('li', { text: 'Possible: at least two sources are wet, or most show at least light rain. Dry: anything less. One wet source alone stays Dry.' }),
       el('li', { text: 'Confidence “4/6” = sources backing the verdict / sources that returned data.' }),
       el('li', { text: `If you reach a stretch within ${RADAR_WINDOW_MIN} min and the latest radar frame shows rain there, it is raised one level.` }),
@@ -23,7 +23,7 @@ export function mountHow(root: HTMLElement): void {
       el('li', { text: 'MET Malaysia district forecasts are shown as context only. They do not vote.' }),
     ),
     el('p', {
-      text: 'Six voters: Open-Meteo best match, ECMWF IFS, GFS, ICON and JMA (15-min values in Malaysia are interpolated from hourly), and MET Norway (hourly). The radar and MET Malaysia do not vote. All values are shown in mm/h.',
+      text: 'Five voters: ECMWF IFS, GFS, ICON and JMA via Open-Meteo (15-min values in Malaysia are interpolated from hourly), and MET Norway (hourly). Open-Meteo’s “best match” is left out: it is built from these same models, so it would vote twice. The radar and MET Malaysia do not vote. All values are shown in mm/h.',
     }),
     el('p', {
       text: 'Be honest with yourself: tropical showers are small and fast. A forecast is a chance, not a promise.',

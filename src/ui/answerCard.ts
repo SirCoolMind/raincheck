@@ -31,7 +31,7 @@ export function mountAnswer(root: HTMLElement, store: Store, onRetry: () => void
       setText(sentence, 'Checking the drive…');
       detail.className = 'answer-detail skel';
       setText(detail, 'Loading route and forecasts');
-      meta.append(el('span', { class: 'skel', text: 'sources 0/6 · updated' }));
+      meta.append(el('span', { class: 'skel', text: 'sources 0/5 · updated' }));
       root.setAttribute('aria-busy', 'true');
       return;
     }

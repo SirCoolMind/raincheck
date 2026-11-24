@@ -90,7 +90,7 @@ export function judge(votes: Vote[], radar: RadarInput): Verdict {
     base = 'heavy';
     agree = heavyCount;
   } else if (wetCount * 2 > total) {
-    // Strictly more than half: a 3/6 tie is not "Rain".
+    // Strictly more than half: with 5 sources Rain needs 3.
     base = 'rain';
     agree = wetCount;
   } else if (wetCount >= 2 || lightCount * 2 > total) {

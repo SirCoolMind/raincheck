@@ -89,8 +89,8 @@ export const ENDPOINTS = {
   },
 } as const;
 
+// No 'best_match': it is built from these same models (mostly ECMWF here), so it would be a second vote for one model.
 export const OPEN_METEO_MODELS = [
-  'best_match',
   'ecmwf_ifs025',
   'gfs_seamless',
   'icon_seamless',

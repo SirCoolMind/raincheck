@@ -28,7 +28,7 @@ test.describe('RainCheck e2e', () => {
     expect((await snap(page)).level).toBe('rain');
   });
 
-  test('2 tapping a stretch selects it and opens the detail with 6 source rows', async ({ page }) => {
+  test('2 tapping a stretch selects it and opens the detail with 5 source rows', async ({ page }) => {
     await openApp(page, SCENARIOS.rainAtMex);
     const idx = await firstWetIdx(page);
     const cell = page.locator(`#strip .cell[data-idx="${idx}"]`);
@@ -38,10 +38,10 @@ test.describe('RainCheck e2e', () => {
     const detail = page.locator('#detail');
     await expect(detail).toBeVisible();
     const rows = detail.locator('table.vals tbody tr');
-    await expect(rows).toHaveCount(7); // 6 weather voters + radar
-    for (let i = 0; i < 6; i++) await expect(rows.nth(i).locator('td').first()).toHaveText(/\d+(\.\d+)?\s*mm\/h|\d/);
-    await expect(rows.nth(0)).toContainText(/Open-Meteo best match/);
-    await expect(rows.nth(5)).toContainText(/MET Norway/);
+    await expect(rows).toHaveCount(6); // 5 weather voters + radar
+    for (let i = 0; i < 5; i++) await expect(rows.nth(i).locator('td').first()).toHaveText(/\d+(\.\d+)?\s*mm\/h|\d/);
+    await expect(rows.nth(0)).toContainText(/ECMWF IFS/);
+    await expect(rows.nth(4)).toContainText(/MET Norway/);
     expect((await snap(page)).selected).toBe(idx);
     // tapping again deselects
     await cell.click();
@@ -293,7 +293,7 @@ test.describe('RainCheck e2e', () => {
     expect((await snap(page)).level).toBe('dry');
   });
 
-  test('14 heavy scenario (5 of 6 sources at 8 mm/h) says heavy rain', async ({ page }) => {
+  test('14 heavy scenario (4 of 5 sources at 8 mm/h) says heavy rain', async ({ page }) => {
     await openApp(page, SCENARIOS.heavy);
     await expect(page.locator('#answer-sentence')).toHaveText(/^Heavy rain /);
     expect((await snap(page)).level).toBe('heavy');

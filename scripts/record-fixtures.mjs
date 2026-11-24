@@ -26,7 +26,7 @@ const bearings = WAYPOINTS.map((w, i) => {
   return `${Math.round(bearingDeg(prev, next))},90`;
 }).join(';');
 
-const OM_MODELS = 'best_match,ecmwf_ifs025,gfs_seamless,icon_seamless,jma_seamless';
+const OM_MODELS = 'ecmwf_ifs025,gfs_seamless,icon_seamless,jma_seamless';
 const jobs = [
   ['openmeteo.json', 'https://api.open-meteo.com/v1/forecast?latitude=2.9226,3.1579&longitude=101.651,101.7123&minutely_15=precipitation&hourly=precipitation_probability,precipitation&models=' + OM_MODELS + '&timezone=Asia%2FKuala_Lumpur&forecast_days=2&past_days=0', {}],
   ['metno.json', 'https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=2.92&lon=101.65', { 'User-Agent': APP_UA }],

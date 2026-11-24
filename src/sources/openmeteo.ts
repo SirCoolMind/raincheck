@@ -1,10 +1,9 @@
-// Open-Meteo: ONE request for all points, 5 models → 5 SourceResults.
+// Open-Meteo: ONE request for all points, 4 models → 4 SourceResults.
 import { ENDPOINTS, OPEN_METEO_MODELS, TZ, type OpenMeteoModel } from '../config';
 import type { LatLon, PointSeries, SourceHealth, SourceResult } from '../core/types';
 import { cachedReason, errReason, fetchViaProxyOrDirect } from './http';
 
 const LABELS: Record<OpenMeteoModel, string> = {
-  best_match: 'Open-Meteo best match',
   ecmwf_ifs025: 'ECMWF IFS 0.25°',
   gfs_seamless: 'GFS',
   icon_seamless: 'ICON',

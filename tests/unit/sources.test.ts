@@ -67,11 +67,11 @@ describe('open-meteo', () => {
     const url = openMeteoUrl(P2);
     expect(url).toContain('latitude=2.92,3.16');
     expect(url).toContain('longitude=101.65,101.71');
-    expect(url).toContain('models=best_match,ecmwf_ifs025,gfs_seamless,icon_seamless,jma_seamless');
+    expect(url).toContain('models=ecmwf_ifs025,gfs_seamless,icon_seamless,jma_seamless');
     expect(url).toContain('minutely_15=precipitation');
     expect(url).toContain('timezone=Asia%2FKuala_Lumpur');
     expect(res.map((r) => r.id)).toEqual(OPEN_METEO_MODELS.map((m) => `om_${m}`));
-    expect(res.map((r) => r.label)).toEqual(['Open-Meteo best match', 'ECMWF IFS 0.25°', 'GFS', 'ICON', 'JMA']);
+    expect(res.map((r) => r.label)).toEqual(['ECMWF IFS 0.25°', 'GFS', 'ICON', 'JMA']);
     for (const r of res) {
       expect(r.health.state).toBe('ok');
       expect(r.resolution).toBe('15-min (interpolated from hourly in Malaysia)');
@@ -86,17 +86,17 @@ describe('open-meteo', () => {
         expect(s!.probTimes![1]! - s!.probTimes![0]!).toBe(3600_000);
       }
     }
-    // best_match raw first value 0 mm/15min → 0 mm/h
+    // ECMWF raw first value 0 mm/15min → 0 mm/h
     expect(res[0]!.series[0]!.mmh[0]).toBe(0);
   });
 
   it('converts mm/15min to mm/h (×4) on a hand-made single-point object', () => {
     const mini = {
-      minutely_15: { time: ['2026-11-19T07:30', '2026-11-19T07:45'], precipitation_best_match: [0.1, 0.3] },
+      minutely_15: { time: ['2026-11-19T07:30', '2026-11-19T07:45'], precipitation_ecmwf_ifs025: [0.1, 0.3] },
       hourly: {
         time: ['2026-11-19T07:00', '2026-11-19T08:00'],
-        precipitation_best_match: [0.5, 2],
-        precipitation_probability_best_match: [20, 80],
+        precipitation_ecmwf_ifs025: [0.5, 2],
+        precipitation_probability_ecmwf_ifs025: [20, 80],
       },
     };
     const [r] = parseOpenMeteo(mini, [P2[0]!], { stale: false, fetchedAt: 1 });
@@ -133,10 +133,10 @@ describe('open-meteo', () => {
     expect(r[0]!.health).toMatchObject({ state: 'degraded', reason: 'cached 12 min', via: 'cache' });
   });
 
-  it('HTTP 500 → 5 failed results, null series, never throws', async () => {
+  it('HTTP 500 → 4 failed results, null series, never throws', async () => {
     mockFetch(() => ({ status: 500, body: 'oops' }));
     const res = await fetchOpenMeteo(P2, NOW);
-    expect(res).toHaveLength(5);
+    expect(res).toHaveLength(4);
     for (const r of res) {
       expect(r.health).toMatchObject({ state: 'failed', reason: 'HTTP 500' });
       expect(r.series).toEqual([null, null]);
@@ -154,7 +154,7 @@ describe('open-meteo', () => {
   it.each(MALFORMED)('malformed %s → failed, null series', async (name) => {
     mockFetch(() => ({ body: bad(name) }));
     const res = await fetchOpenMeteo(P2, NOW);
-    expect(res).toHaveLength(5);
+    expect(res).toHaveLength(4);
     for (const r of res) {
       expect(r.health.state).toBe('failed');
       expect(r.series).toEqual([null, null]);

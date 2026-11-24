@@ -50,7 +50,7 @@ const route: RouteData = {
   legs: [],
 };
 
-function src(id: 'metno' | 'om_best_match', series: (PointSeries | null)[], state: 'ok' | 'failed' = 'ok'): SourceResult {
+function src(id: 'metno' | 'om_ecmwf_ifs025', series: (PointSeries | null)[], state: 'ok' | 'failed' = 'ok'): SourceResult {
   return { id, label: id, resolution: '', health: { id, label: id, state, reason: '', fetchedAt: null }, series };
 }
 
@@ -60,7 +60,7 @@ describe('evaluateTrip', () => {
   const dry: PointSeries = { times: [t0], stepMin: 60, mmh: [0] };
 
   it('votes per source incl. failed ones', () => {
-    const sources = [src('metno', [wet, wet, wet, wet]), src('om_best_match', [null, null, null, null], 'failed')];
+    const sources = [src('metno', [wet, wet, wet, wet]), src('om_ecmwf_ifs025', [null, null, null, null], 'failed')];
     const ev = evaluateTrip(stretches, t0, sources, null, t0);
     expect(ev).toHaveLength(4);
     expect(ev[0]!.verdict.votes).toHaveLength(2);

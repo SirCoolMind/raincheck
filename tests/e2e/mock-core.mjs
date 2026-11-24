@@ -14,7 +14,7 @@ export const TEST_NOW = '2026-11-20T07:00:00+08:00';
 export const TEST_DAY = '2026-11-20';
 const DAY0 = Date.parse(`${TEST_DAY}T00:00:00+08:00`);
 const MIN = 60_000;
-export const MODELS = ['best_match', 'ecmwf_ifs025', 'gfs_seamless', 'icon_seamless', 'jma_seamless'];
+export const MODELS = ['ecmwf_ifs025', 'gfs_seamless', 'icon_seamless', 'jma_seamless'];
 
 // ───────────── scenarios: mmh(lat, lon, ms, model) → mm/h. model = an Open-Meteo model id or 'metno'. ─────────────
 const LATE_RAIN_FROM = Date.parse(`${TEST_DAY}T08:00:00+08:00`);

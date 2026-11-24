@@ -136,12 +136,17 @@ Record each real commute here to compare the verdict with what you saw.
 
 ## Changelog
 
+### 1.2 (2026-11-24)
+
+- Five voters instead of six: Open-Meteo "best match" is removed. It is built from the same models that already
+  vote (mostly ECMWF here), so it counted one model twice. With 5 sources there are no ties; Rain needs 3 of 5.
+
 ### 1.1 (2026-11-24)
 
 - Verdict rule v3, to stop "Rain" on days that stay dry. The models report rain in 0.1 mm steps per 15 min and
   spread that drizzle over whole areas in the tropics; the old 0.4 mm/h threshold counted exactly that as rain.
   - A source now votes wet at 1 mm/h. 0.4–1 mm/h is only "light".
-  - Rain needs more than half of the sources (a 3/6 tie is now Possible). Possible needs two wet sources or most
+  - Rain needs more than half of the sources (a 3/6 tie became Possible). Possible needs two wet sources or most
     sources showing light rain; one wet outlier stays Dry.
   - If the radar shows no rain anywhere within about 30 km of the route, stretches you reach in the next 90 min are
     lowered one level (was 40 min, and only when clear within 4 km).
