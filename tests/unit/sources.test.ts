@@ -432,19 +432,24 @@ describe('rainviewer', () => {
     const earlier = past.find((f) => f.time >= latest.time - 60 * 60_000 && f !== latest)!;
     const a = { lat: 2.9226, lon: 101.651 };
     const ta = tileFor(a, 7);
+    // A 3×3 echo centred dx px east of the point (3×3 so the every-2nd-pixel area scan always sees it).
     const img = (dx: number | null): ImageLike => {
       const data = new Uint8ClampedArray(256 * 256 * 4);
-      if (dx !== null) data[(ta.py * 256 + ta.px + dx) * 4 + 3] = 200;
+      if (dx !== null) for (let y = -1; y <= 1; y++) for (let x = -1; x <= 1; x++) data[((ta.py + y) * 256 + ta.px + dx + x) * 4 + 3] = 200;
       return { width: 256, height: 256, data };
     };
-    // latest: echo 10 px away (outside the ±3 px box) → clear; earlier frame: echo 2 px away → recentWet
+    // latest: echo 10 px away (outside the ±3 px box, inside the ~30 km area) → clear, area not clear;
+    // earlier frame: echo 2 px away → recentWet
     const loader = vi.fn(async (u: string) => (u.includes(latest.path) ? img(10) : u.includes(earlier.path) ? img(2) : img(null)));
-    expect(await sampleRadarDetail(index, [a], loader)).toEqual([{ clear: true, recentWet: true }]);
+    expect(await sampleRadarDetail(index, [a], loader)).toEqual([{ clear: true, recentWet: true, areaClear: false }]);
+    // latest: nothing anywhere → area clear too
+    const allClear = vi.fn(async (u: string) => (u.includes(earlier.path) ? img(2) : img(null)));
+    expect(await sampleRadarDetail(index, [a], allClear)).toEqual([{ clear: true, recentWet: true, areaClear: true }]);
     // latest: echo 2 px away → not clear
     const wetNow = vi.fn(async (u: string) => (u.includes(latest.path) ? img(2) : img(null)));
-    expect(await sampleRadarDetail(index, [a], wetNow)).toEqual([{ clear: false, recentWet: false }]);
+    expect(await sampleRadarDetail(index, [a], wetNow)).toEqual([{ clear: false, recentWet: false, areaClear: false }]);
     // unreadable tiles → unknown
-    expect(await sampleRadarDetail(index, [a], async () => null)).toEqual([{ clear: null, recentWet: null }]);
+    expect(await sampleRadarDetail(index, [a], async () => null)).toEqual([{ clear: null, recentWet: null, areaClear: null }]);
     expect(await sampleRadarDetail({ host: 'h', frames: [], generatedMs: 0 }, [a], async () => null)).toEqual([{ clear: null, recentWet: null }]);
   });
 

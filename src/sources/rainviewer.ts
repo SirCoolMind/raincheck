@@ -107,12 +107,20 @@ const MIN_MS = 60_000;
  * - recentWet: any echo in that box in the frames of the hour before the latest one.
  * null when the tiles cannot be read. Each tile of each frame is loaded once.
  */
+/** ≈ 28 km around the route's bounds. */
+export const AREA_PAD_DEG = 0.25;
+export const AREA_CLEAR_MAX_SHARE = 0.001;
+
 export async function sampleRadarDetail(index: RadarIndex, points: LatLon[], loadImage: ImageLoader, radiusPx = 3): Promise<RadarDetail[]> {
   const past = index.frames.filter((f) => f.kind === 'past');
   const latest = past[past.length - 1];
   if (!latest) return points.map(() => ({ clear: null, recentWet: null }));
   const earlier = past.filter((f) => f !== latest && f.time >= latest.time - 60 * MIN_MS);
   const refs = points.map((p) => tileFor(p, MAX_ZOOM));
+  // Whole area around the route in the latest frame (same tiles the map shows). Below ~0.1 % wet counts as clear,
+  // so a stray clutter pixel does not block it.
+  const share = (await radarCoverage({ ...index, frames: [latest] }, points, loadImage, AREA_PAD_DEG).catch(() => [null]))[0] ?? null;
+  const areaClear = share === null ? null : share < AREA_CLEAR_MAX_SHARE;
   const cache = new Map<string, Promise<ImageLike | null>>();
   const load = (frame: RadarFrame, t: { x: number; y: number }) => {
     const url = tileUrl(index.host, frame, MAX_ZOOM, t.x, t.y);
@@ -145,7 +153,7 @@ export async function sampleRadarDetail(index: RadarIndex, points: LatLon[], loa
         }
         if (w === false) recentWet = false;
       }
-      return { clear: now === null ? null : !now, recentWet };
+      return { clear: now === null ? null : !now, recentWet, areaClear };
     }),
   );
 }

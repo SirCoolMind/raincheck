@@ -99,6 +99,8 @@ export type RadarSample = boolean | null;
 export interface RadarDetail {
   clear: boolean | null;
   recentWet: boolean | null;
+  /** No echo anywhere around the route (~30 km) in the latest frame; same for every stretch. */
+  areaClear?: boolean | null;
 }
 
 // ───────────── MET Malaysia ─────────────

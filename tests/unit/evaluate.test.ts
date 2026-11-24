@@ -103,4 +103,11 @@ describe('evaluateTrip', () => {
     // no detail → unchanged (old behaviour)
     expect(evaluateTrip(stretches, t0, sources, [false, false, false, false], t0).every((e) => e.verdict.level === 'rain')).toBe(true);
   });
+  it('nothing on radar around the route lowers stretches reached within 90 min', () => {
+    const sources = [src('metno', [wet, wet, wet, wet])];
+    const detail = [0, 1, 2, 3].map(() => ({ clear: true, recentWet: false, areaClear: true }));
+    // now 40 min before departure: mids at +47.5 … +92.5 min
+    const ev = evaluateTrip(stretches, t0, sources, [false, false, false, false], t0 - 40 * MIN, detail);
+    expect(ev.map((e) => e.verdict.level)).toEqual(['possible', 'possible', 'possible', 'rain']);
+  });
 });

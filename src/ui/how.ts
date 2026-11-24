@@ -1,7 +1,7 @@
 // "How this works": the versioned verdict rule in plain language, plus attribution. Shown in Settings → About.
 import { el } from './dom';
 import { versionLabel } from '../version';
-import { RULE_VERSION, RAIN_MMH, HEAVY_MMH, RADAR_WINDOW_MIN, RADAR_CLEAR_WINDOW_MIN } from '../core/verdict';
+import { RULE_VERSION, RAIN_MMH, LIGHT_MMH, HEAVY_MMH, RADAR_WINDOW_MIN, RADAR_CLEAR_WINDOW_MIN, RADAR_AREA_CLEAR_WINDOW_MIN } from '../core/verdict';
 
 export function mountHow(root: HTMLElement): void {
   const d = el('div', { class: 'how' });
@@ -13,12 +13,13 @@ export function mountHow(root: HTMLElement): void {
     el(
       'ol',
       {},
-      el('li', { text: `A source is wet at ≥ ${RAIN_MMH} mm/h (≈ 0.1 mm per 15 min) and heavy at ≥ ${HEAVY_MMH} mm/h.` }),
-      el('li', { text: 'No data: no source returned a value. Dry: no source is wet.' }),
-      el('li', { text: 'Possible: some sources are wet, but fewer than half. Rain: half or more are wet. Heavy: more than half are heavy.' }),
+      el('li', { text: `A source is wet at ≥ ${RAIN_MMH} mm/h and heavy at ≥ ${HEAVY_MMH} mm/h. ${LIGHT_MMH}–${RAIN_MMH} mm/h (0.1–0.2 mm per 15 min, the smallest step the models report) is only light: the models spread it over whole areas in the tropics, and it is often no rain at all where you are.` }),
+      el('li', { text: 'No data: no source returned a value. Heavy: more than half are heavy. Rain: more than half are wet (3 of 6 is not enough).' }),
+      el('li', { text: 'Possible: at least two sources are wet, or most show at least light rain. Dry: anything less. One wet source alone stays Dry.' }),
       el('li', { text: 'Confidence “4/6” = sources backing the verdict / sources that returned data.' }),
       el('li', { text: `If you reach a stretch within ${RADAR_WINDOW_MIN} min and the latest radar frame shows rain there, it is raised one level.` }),
       el('li', { text: `If you reach a stretch within ${RADAR_CLEAR_WINDOW_MIN} min and the latest radar frame shows no rain within about 4 km, it is lowered one level: the models often get a storm right but its timing wrong. If the radar showed rain there in the hour before, the answer says the rain just ended and roads may be wet.` }),
+      el('li', { text: `If the latest radar frame shows no rain anywhere within about 30 km of the route, stretches you reach within ${RADAR_AREA_CLEAR_WINDOW_MIN} min are lowered one level too: no shower is close enough to drift in by then. New afternoon storms can still form from nothing, so it never goes more than one level.` }),
       el('li', { text: 'MET Malaysia district forecasts are shown as context only. They do not vote.' }),
     ),
     el('p', {

@@ -6,7 +6,7 @@ import { icon } from './icons';
 import { formatRange, formatHHMM } from '../core/timing';
 import { levelLabel } from '../core/summary';
 import { formatMmh, formatProb } from '../core/format';
-import { RAIN_MMH, RADAR_CLEAR_WINDOW_MIN, RADAR_WINDOW_MIN } from '../core/verdict';
+import { LIGHT_MMH, RAIN_MMH, RADAR_AREA_CLEAR_WINDOW_MIN, RADAR_CLEAR_WINDOW_MIN, RADAR_WINDOW_MIN } from '../core/verdict';
 import { glossMalay } from '../sources/metmy';
 
 // ───────────── Sheet drag ─────────────
@@ -117,7 +117,7 @@ export function mountDetail(root: HTMLElement, store: Store, actions: Actions): 
       tbody.append(
         el(
           'tr',
-          { class: mmh === null ? '' : mmh >= RAIN_MMH ? 'wet' : 'dry' },
+          { class: mmh === null ? '' : mmh >= RAIN_MMH ? 'wet' : mmh >= LIGHT_MMH ? '' : 'dry' },
           el('th', { scope: 'row' }, src.label, el('small', { text: src.health.state === 'ok' ? src.resolution : `${src.resolution} · ${src.health.reason}` })),
           el('td', { text: formatMmh(mmh) }),
           el('td', { class: 'prob', text: formatProb(vote?.prob ?? null), title: 'Chance of rain (hourly)' }),
@@ -135,10 +135,16 @@ export function mountDetail(root: HTMLElement, store: Store, actions: Actions): 
           : det?.clear
             ? det.recentWet
               ? 'clear now, rained here in the last hour (roads may be wet)'
-              : 'clear within ~4 km now'
+              : det.areaClear
+                ? 'clear within ~30 km of the route now'
+                : 'clear within ~4 km now'
             : 'no rain at this point now';
     const radarCan =
-      minsAway <= RADAR_CLEAR_WINDOW_MIN ? 'radar can raise or lower this stretch' : minsAway <= RADAR_WINDOW_MIN ? 'radar can raise this stretch' : 'too far ahead for radar';
+      minsAway <= RADAR_CLEAR_WINDOW_MIN || (det?.areaClear && minsAway <= RADAR_AREA_CLEAR_WINDOW_MIN)
+        ? 'radar can raise or lower this stretch'
+        : minsAway <= RADAR_WINDOW_MIN
+          ? 'radar can raise this stretch'
+          : 'too far ahead for radar';
     tbody.append(
       el(
         'tr',
@@ -155,7 +161,7 @@ export function mountDetail(root: HTMLElement, store: Store, actions: Actions): 
         el('thead', { class: 'vh' }, el('tr', {}, el('th', { text: 'Source' }), el('th', { text: 'Rain rate' }), el('th', { text: 'Chance' }))),
         tbody,
       ),
-      el('p', { class: 'note', text: `${v.agree}/${v.total} sources agree · rain ≥ ${RAIN_MMH} mm/h, heavy ≥ 4 mm/h` }),
+      el('p', { class: 'note', text: `${v.agree}/${v.total} sources agree · light ≥ ${LIGHT_MMH}, rain ≥ ${RAIN_MMH}, heavy ≥ 4 mm/h` }),
     );
     // MET Malaysia context (not a vote)
     const f = s.metmy?.forecasts.find((x) => x.district === ev.stretch.district && x.date === mytDate(ev.eta.midMs));
