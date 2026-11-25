@@ -87,14 +87,15 @@ docs/screens/ design-loop screenshots (generated, gitignored)
 - MET Malaysia context uses the nearest of all 168 districts, and warnings for the states the trip crosses.
 - E2E tests seed the original commute (`tests/fixtures/test-route.json`) as a returning user; `seed: false` tests the first visit.
 
-## How the verdict works (rule v1)
+## How the verdict works (rule v3)
 
-The rules live in `src/core/verdict.ts` as `RULE_VERSION = 'v1'`.
+The rules live in `src/core/verdict.ts` as `RULE_VERSION = 'v3'`. Five forecast sources vote for each stretch of the route.
 
-- **Wet thresholds.** A source reading of 0.4 mm/h or more counts as wet (rain). A reading of 4 mm/h or more counts as heavy.
-- **Levels.** No data: no source returned a value. Dry: no source is wet. Possible: fewer than half of the sources are wet. Rain: at least half are wet and fewer than half are heavy. Heavy: more than half are heavy.
-- **Confidence.** `agree/total` is the number of sources that back the base level, out of the sources that returned a value.
-- **Radar.** If RainViewer radar shows rain on the route within 90 minutes of the departure time, the level goes up one step (Dry becomes Possible, Possible becomes Rain, Rain becomes Heavy). Heavy stays Heavy.
+- **Thresholds.** A source reading of 1 mm/h or more votes wet. 0.4 to 1 mm/h is only light rain. 4 mm/h or more is heavy.
+- **Levels.** No data: no source returned a value. Heavy: more than half of the sources are heavy. Rain: more than half are wet (3 of 5). Possible: at least two sources are wet, or more than half show light rain or more. Dry: anything else, so one wet outlier stays Dry.
+- **Confidence.** `agree/total` is the number of sources that back the shown level, out of the sources that returned a value.
+- **Radar raises.** If RainViewer radar shows rain at a stretch you reach within 90 minutes, the level goes up one step (Dry becomes Possible, Possible becomes Rain, Rain becomes Heavy). Heavy stays Heavy.
+- **Radar lowers.** If the latest frame shows no rain within about 4 km of a stretch you reach within 40 minutes, or no rain anywhere within about 30 km of the route for a stretch you reach within 90 minutes, the level goes down one step. If the radar showed rain nearby in the last hour, the answer also says "Rain just ended near …".
 - **MET Malaysia.** Its forecasts and warnings are shown as context only. They do not vote in the verdict.
 
 ## Privacy and keys
@@ -124,15 +125,41 @@ The rules live in `src/core/verdict.ts` as `RULE_VERSION = 'v1'`.
 
 ## Field-test log
 
-Record each real commute here to compare the verdict with what you saw.
+Record each real drive here to check the verdict against what you saw. Fill in the first five columns
+before you leave (from the app), and the rest when you arrive. One row per drive.
 
-| Date | Depart | Tool said | Actually saw | Notes |
-|---|---|---|---|---|
-|  |  |  |  |  |
-|  |  |  |  |  |
-|  |  |  |  |  |
-|  |  |  |  |  |
-|  |  |  |  |  |
+**How to fill it in**
+
+- **Date / Leave:** the day (YYYY-MM-DD) and the departure time you checked, in MYT.
+- **Trip:** the tab or trip name (Morning, Evening, or a custom trip).
+- **Predicted:** the verdict for that departure: Dry, Possible, Rain or Heavy.
+- **Agree:** the agreement shown, for example `4/5`. Add `R↑` if the radar raised it or `R↓` if it lowered it.
+- **Actual:** the worst rain you drove through: None (dry road), Wet road (rain had ended), Light
+  (wipers on low), Rain (wipers on normal), Heavy (wipers on fast, poor visibility).
+- **Where / when:** where on the route and roughly when it rained, if it did.
+- **Match:** ✅ hit, ⚠️ near miss (one level off, or right rain at the wrong time), ❌ miss.
+- **App / rule:** the app version from the panel footer, for example `1.2.1 / v3`, so results can be
+  compared across rule changes.
+
+**Scoring a match**
+
+| Predicted | ✅ hit if Actual is | ⚠️ near miss if | ❌ miss if |
+|---|---|---|---|
+| Dry | None, Wet road | Light | Rain, Heavy |
+| Possible | Wet road, Light, None | Rain | Heavy |
+| Rain | Light, Rain | Heavy, Wet road | None |
+| Heavy | Heavy, Rain | Light | None, Wet road |
+
+| Date | Leave | Trip | Predicted | Agree | Actual | Where / when | Match | App / rule | Notes |
+|---|---|---|---|---|---|---|---|---|---|
+| 2026-11-26 | 07:30 | Morning | Possible | 2/5 | Light | Near the toll, 07:45 | ✅ | 1.2.1 / v3 | Example row, delete once you have real ones |
+|  |  |  |  |  |  |  |  |  |  |
+|  |  |  |  |  |  |  |  |  |  |
+|  |  |  |  |  |  |  |  |  |  |
+|  |  |  |  |  |  |  |  |  |  |
+
+**Tally** (update every week or so): drives logged: 0 · hits: 0 · near misses: 0 · misses: 0.
+Misses where it said Dry and it rained matter most; note them in Notes with as much detail as you can.
 
 ## Changelog
 
